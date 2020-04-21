@@ -1,10 +1,16 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "esnext",
+    "target": "ES5",
     "moduleResolution": "node",
+    "lib": ["ESNext", "DOM"],
     "sourceMap": true,
-    "outDir": "build"
+    "outDir": "build",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "pretty": true,
+    "watch": true
   },
   "compileOnSave": true,
   "exclude": [

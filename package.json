@@ -8,18 +8,13 @@
     "private": false,
     "devDependencies": {
         "@types/node": "latest",
-        "tslint": "latest",
         "typescript": "latest",
-        "prettier": "latest",
         "nodemon": "latest",
-        "@babel/core": "latest",
-        "@babel/cli": "latest",
-        "@babel/preset-typescript": "latest",
-        "@babel/preset-env": "latest",
-        "@babel/plugin-proposal-class-properties": "7.5.5",
-        "@babel/plugin-proposal-object-rest-spread": "7.6.2"
+        "pkg": "latest"
     },
     "scripts": {
-        "watch": "./watch.sh"
+        "start": "nodemon src/app.ts",
+        "build": "tsc",
+        "dist": "pkg --target node12 src/app.ts"
     }
 }
