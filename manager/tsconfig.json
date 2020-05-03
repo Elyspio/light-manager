@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"moduleResolution": "node",
+		"lib": [
+			"ESNext",
+			"DOM"
+		],
+		"sourceMap": true,
+		"outDir": "build",
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"resolveJsonModule": true,
+		"pretty": true,
+		"watch": true,
+		"removeComments": true,
+		"alwaysStrict": true
+	},
+	"compileOnSave": true,
+	"exclude": [
+		"node_modules",
+		"build",
+		"dist"
+	],
+	"include": [
+		"src"
+	]
+}

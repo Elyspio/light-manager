@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+		const socket = io.connect('http://localhost:1515');
+		console.log(socket)
+		socket.on('news', (data) => {
+			console.log(data);
+			socket.emit('my other event', {my: 'data'});
+		});
+
+		socket.on("update", (lights) => {
+			console.log("light updates", lights);
+		})
+    </script>
+</body>
+</html>

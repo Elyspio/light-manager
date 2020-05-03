@@ -1,0 +1,31 @@
+{
+	"name": "ts-node-template",
+	"version": "1.0.0",
+	"description": "NodeJS with typescript support template",
+	"author": "Jonathan Guichard",
+	"license": "MIT",
+	"private": false,
+	"dependencies": {
+		"@reduxjs/toolkit": "^1.3.5",
+		"async-mutex": "^0.2.2",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"redux": "^4.0.5",
+		"redux-logger": "^3.0.6",
+		"socket.io": "^2.3.0"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.6",
+		"@types/node": "latest",
+		"@types/socket.io": "^2.1.4",
+		"nodemon": "latest",
+		"pkg": "latest",
+		"ts-node": "^8.10.1",
+		"typescript": "latest"
+	},
+	"scripts": {
+		"start-back": "nodemon build/app.js",
+		"build-back": "tsc",
+		"dist-back": "pkg --target node14 build/app.js"
+	}
+}
