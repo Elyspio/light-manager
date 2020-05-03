@@ -1,3 +1,4 @@
 export const socketEvents = {
-	update: "UPDATE"
+	update: "UPDATE_ALL",
+	updateLight: "UPDATE_LIGHT"
 }

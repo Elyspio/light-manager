@@ -5,3 +5,4 @@ const createAction = <P>(name: string) => _createAction<P>("lights/" + name);
 
 
 export const addLight = createAction<LampData>("add")
+export const refreshLight = createAction<LampData>("refresh")

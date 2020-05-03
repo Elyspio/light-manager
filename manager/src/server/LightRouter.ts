@@ -1,22 +1,18 @@
-import {Response, Router} from "express";
+import {Router} from "express";
 import {LightManager} from "../module/light/manager";
-import {SetColorRequest} from "./requests";
+import {LightRequest, SetColorRequest, ToggleRequest} from "./requests";
+import {Responses} from "./responses";
 
 export const lightRouter = Router();
 
 const manager = LightManager.instance
 
-const notSupported = (res: Response) => res.status(500).send(JSON.stringify({
-	error: "NIY",
-	message: "Not implemented yet"
-}))
-const ok = (res: Response) => res.status(200).end();
 
 lightRouter.post("/:lightIp/color", async (req: SetColorRequest, res) => {
 	const light = manager.get(req.params.lightIp)
 	const {rgb, colorTemp, hsv} = req.body.color
 	if (colorTemp) {
-		notSupported(res);
+		Responses.notSupported(res);
 	}
 	if (rgb) {
 		await light.setColor(rgb)
@@ -25,17 +21,28 @@ lightRouter.post("/:lightIp/color", async (req: SetColorRequest, res) => {
 		await light.setColor(hsv)
 	}
 
-	ok(res);
+	Responses.ok(res);
 })
 
 
-lightRouter.post("/:lightIp/toggle", async (req, res) => {
+lightRouter.post("/:lightIp/toggle", async (req: ToggleRequest, res) => {
 	const light = manager.get(req.params.lightIp)
+	if (light === undefined) {
+		Responses.unknownLight(res, light);
+	}
 	await light.toggle();
-	setTimeout(() => ok(res), 100)
+	setTimeout(() => Responses.ok(res), 100)
 })
 
-lightRouter.get("/:lightIp", async (req, res) => {
+lightRouter.get("/:lightIp", async (req: LightRequest, res) => {
 	const light = manager.get(req.params.lightIp)
+	if (light === undefined) {
+		Responses.unknownLight(res, light);
+	}
 	res.send(JSON.stringify(light.json()))
+})
+
+lightRouter.get("/", async (req, res) => {
+	const lights = manager.get()
+	res.send(JSON.stringify(lights.map(l => l.json())))
 })

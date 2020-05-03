@@ -14,6 +14,7 @@ export type LightEffect = "sudden" | "smooth"
 
 export class LightService {
 
+
 	private tcp: {
 		client: Socket
 	}
@@ -38,16 +39,25 @@ export class LightService {
 				const response = await instance.getProps()
 				console.log("data", response);
 				resolve({
-					data: {
-						powered: response.power === "on",
-						color: Helper.convertColor(response.rgb as number),
-						brightness: response.bright as number,
-						mode: response.color_mode as ColorMode,
-					},
+					data: LightService.convertProps(response),
 					service: instance
 				});
 			})
 		});
+	}
+
+
+	public static convertProps(data: { [key in LampProperty]: string | number }): Partial<LightData> {
+		return {
+			powered: data.power === "on",
+			color: Helper.convertColor(data.rgb as number),
+			brightness: data.bright as number,
+			mode: data.color_mode as ColorMode,
+		}
+	}
+
+	public static equal(l1: LightData, l2: LightData): boolean {
+		return JSON.stringify(l1) === JSON.stringify(l2)
 	}
 
 	private static convert(raw: (string | number)[], cols: string[]): { [key: string]: string } {
@@ -100,7 +110,6 @@ export class LightService {
 		}, {timeout: duration})
 	}
 
-
 	public setBright(brightness: number, duration?: number, effect?: LightEffect) {
 		return this.interact({
 			method: "set_bright",
@@ -116,7 +125,6 @@ export class LightService {
 			id: this.light.id
 		}, {timeout: duration})
 	}
-
 
 	public setScene(cls: string, values: number[]) {
 		return this.interact({
@@ -182,6 +190,9 @@ export class LightService {
 		})
 	}
 
+	public async refresh(): Promise<Partial<LightData>> {
+		return LightService.convertProps(await this.getProps());
+	}
 
 	private async interact(data: LampParam, config?: { timeout: number }): Promise<LampSocketReturn> {
 		return new Promise((resolve, reject) => {
@@ -227,6 +238,7 @@ export class LightService {
 		})
 
 	}
+
 }
 
 

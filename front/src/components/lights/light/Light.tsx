@@ -8,7 +8,7 @@ import {refreshLight} from "../../../store/module/lights/action";
 import {connect} from "react-redux";
 import {names} from "../../../config/lamps";
 
-export interface Props extends  StateProps, DispatchProps{
+export interface Props extends StateProps, DispatchProps {
 	data: LightData
 }
 
@@ -17,7 +17,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-	refresh:  (data: LightData) => void
+	refresh: (data: LightData) => void
 }
 
 const mapStateToProps = (state: RootState) => ({});
@@ -50,8 +50,8 @@ class Light extends React.Component<Props> {
 	}
 
 
-	private refresh = async() => {
-		const data  = await LightService.refresh(this.props.data);
+	private refresh = async () => {
+		const data = await LightService.refresh(this.props.data);
 		this.props.refresh(data);
 	}
 }

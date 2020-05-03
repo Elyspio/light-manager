@@ -1,5 +1,5 @@
 import {createReducer} from "@reduxjs/toolkit";
-import {addLight} from "./action";
+import {addLight, refreshLight} from "./action";
 
 export type LampState = {
 	lamps: LampData[]
@@ -22,6 +22,10 @@ export const reducer = createReducer<LampState>({lamps: []}, builder => {
 		}
 		console.log("REDUX", JSON.parse(JSON.stringify(state.lamps)));
 	})
-});
 
+	builder.addCase(refreshLight, (state, action) => {
+		const index = state.lamps.findIndex(l => l.ip === action.payload.ip);
+		state.lamps[index] = action.payload;
+	})
+});
 

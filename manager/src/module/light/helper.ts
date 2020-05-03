@@ -19,4 +19,21 @@ export namespace Helper {
 			return color.r * (1 << 16) + color.g * (1 << 8) + color.b
 		}
 	}
+
+	export function equal(a: object, b: object): boolean {
+
+		const keys = {n: Object.keys(a), p: Object.keys(b)}
+		if (keys.n.length !== keys.p.length) return false;
+
+		for (const key of keys.n) {
+			if (typeof a[key] === "object") {
+				if (!equal(a[key], b[key])) return false;
+			} else {
+				if (a[key] !== b[key]) {
+					return false
+				}
+			}
+		}
+		return true;
+	}
 }

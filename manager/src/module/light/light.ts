@@ -1,5 +1,6 @@
 import {LightEffect, LightService} from "./service";
 import {ColorMode, ColorRgb, Ip} from "./types";
+import {Helper} from "./helper";
 
 
 export interface ColorHsv {
@@ -9,7 +10,7 @@ export interface ColorHsv {
 
 export type LightData = {
 	ip: Ip,
-	color?: ColorRgb | ColorHsv,
+	color?: ColorRgb,
 	mode?: ColorMode
 	brightness?: number,
 	powered?: boolean
@@ -61,7 +62,7 @@ export class Light {
 		return await new Light(id, ip, port).init();
 	}
 
-	public async setColor(color: ColorRgb | ColorHsv, effect?: LightEffect, duration?: number) {
+	public async setColor(color: ColorRgb, effect?: LightEffect, duration?: number) {
 
 		if ((color as ColorRgb).r !== undefined) {
 			if (this.mode !== ColorMode.TurnRgb) {
@@ -72,15 +73,6 @@ export class Light {
 			await this.service.setRgb(color as ColorRgb, duration, effect)
 		}
 
-		if ((color as ColorHsv).hue !== undefined) {
-			if (this.mode !== ColorMode.TurnHsv) {
-				await this.service.setPower(true, ColorMode.TurnHsv, duration, effect)
-			} else if (this.powered === false) {
-				await this.service.toggle()
-			}
-			const hsv = color as ColorHsv
-			await this.service.setHsv(hsv.hue, hsv.sat, duration, effect)
-		}
 		this.data.color = color;
 		this.data.powered = true;
 	}
@@ -113,6 +105,28 @@ export class Light {
 		return {
 			...this.data
 		}
+	}
+
+	public async refresh(): Promise<boolean> {
+		const newData = await this.service.refresh();
+		const prevRawData = this.json();
+		const prevData: Partial<LightData> = {
+			brightness: prevRawData.brightness,
+			powered: prevRawData.powered,
+			color: prevRawData.color,
+			mode: prevRawData.mode
+		}
+
+		const refresh = !Helper.equal(newData, prevData)
+
+		if (refresh) {
+			this.data = {
+				...this.data,
+				...newData
+			}
+			return true;
+		}
+		return false;
 	}
 }
 

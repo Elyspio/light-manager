@@ -3,21 +3,22 @@ import {store} from "../../store";
 import {LampData} from "../../store/light/reducer";
 import {EventEmitter} from "events";
 import {Mutex} from "async-mutex"
+import {refreshRate} from "../../config/lights";
+
 
 const mutex = new Mutex();
 
 export class LightManager extends EventEmitter {
 	public static events = {
-		updateLights: "NEW_LIGHT"
+		updateLights: "NEW_LIGHT",
+		refreshLight: "REFRESH_LIGHT"
 	}
 
-	private readonly lights: Array<Light>;
+	private readonly lights: Light[];
 
 	private constructor() {
 		super();
 		this.lights = [];
-		const self = this;
-
 
 		const callback = async () => {
 			const release = await mutex.acquire();
@@ -34,7 +35,14 @@ export class LightManager extends EventEmitter {
 			release();
 		}
 
+		const self = this;
 		store.subscribe(callback);
+		setTimeout(() => {
+			console.log("timeout");
+			setInterval(() => {
+				self.refresh()
+			}, refreshRate)
+		}, 1000)
 
 	}
 
@@ -64,6 +72,17 @@ export class LightManager extends EventEmitter {
 
 		if (typeof idOrIp === "number") {
 			return this.lights.find(l => l.id === idOrIp);
+		}
+	}
+
+
+	private async refresh() {
+		console.log("refresh");
+		for (const light of this.lights) {
+			if (await light.refresh()) {
+				this.emit(LightManager.events.refreshLight, light.ip)
+				console.log("refresh light", light.ip)
+			}
 		}
 	}
 

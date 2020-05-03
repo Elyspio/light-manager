@@ -6,6 +6,7 @@ import {Server} from "socket.io";
 import {urlencoded} from "body-parser";
 import {socketEvents} from "./config/socket";
 import {lightRouter} from "./server/LightRouter";
+import {Ip} from "./module/light/types";
 
 const app = require('express')();
 const cors = require('cors')
@@ -21,11 +22,17 @@ discover();
 
 lm.on(LightManager.events.updateLights, (lights: Light[]) => {
 	console.log("Refresh lights NB=" + lights.length, lights.map(l => `${l.ip}: ${l.id}`).join("\n\t"));
-	io.send(socketEvents.update, lights.map(l => l.json()));
+	io.sockets.emit(socketEvents.update, lights.map(l => l.json()));
+})
+
+
+lm.on(LightManager.events.refreshLight, (ip: Ip) => {
+	const sended = io.sockets.emit(socketEvents.updateLight, ip);
+	console.log("send ", sended)
+
 })
 
 server.listen(4000);
-// WARNING: app.listen(80) will NOT work here!
 
 app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, "server", '/index.html'));
