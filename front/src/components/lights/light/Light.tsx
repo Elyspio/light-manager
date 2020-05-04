@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {LightData} from "../../../../../manager/src/module/light/light";
-import {Button, Paper} from "@material-ui/core";
+import {Button, ListItem, Paper} from "@material-ui/core";
 import './Light.scss'
 import {LightService} from "../../../model/LightService";
 import {RootState} from "../../../store/reducer";
 import {refreshLight} from "../../../store/module/lights/action";
 import {connect} from "react-redux";
-import {names} from "../../../config/lamps";
+import {names, Room} from "../../../config/lamps";
 
 export interface Props extends StateProps, DispatchProps {
-	data: LightData
+	data: LightData & {name: string, room: Room}
 }
 
 interface StateProps {
@@ -37,10 +37,13 @@ class Light extends React.Component<Props> {
 		</Button>
 
 		return (
-			<Paper className="Light">
-				<p>{names[data.ip]}</p>
-				{toggle}
-			</Paper>
+			<ListItem className="Light" >
+					<p>{data.name}</p>
+					{toggle}
+				<Button>Day</Button>
+				<Button>Night</Button>
+			</ListItem>
+
 		);
 	}
 

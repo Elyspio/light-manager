@@ -1,11 +1,13 @@
-export const names = {
-	"192.168.0.91": "Lampadaire",
-	"192.168.0.92": "Salon PC",
-	"192.168.0.93": "Salon TV",
-	"192.168.0.94": "Cuisine",
-	"192.168.0.95": "Chambre Jonathan",
-	"192.168.0.96": "Toilette",
-	"192.168.0.97": "Entrée",
-	"192.168.0.98": "Salle de bain",
-	"192.168.0.99": "Chambre Olivier",
+export const names: {[key: string]: {name: string, room: Room}} = {
+	"192.168.0.91": {name: "Lampadaire", room: "living room"},
+	"192.168.0.92": {name: "Salon PC", room: "living room"},
+	"192.168.0.93": {name: "Salon TV", room: "living room"},
+	"192.168.0.94": {name: "Cuisine", room: "others"},
+	"192.168.0.95": {name: "Chambre Jonathan", room: "chambers"},
+	"192.168.0.96": {name: "Toilette", room: "others"},
+	"192.168.0.97": {name: "Entrée", room: "others"},
+	"192.168.0.98": {name: "Salle de bain", room: "living room"},
+	"192.168.0.99": {name: "Chambre Olivier", room: "chambers"},
 }
+
+export type Room = "living room" | "chambers" | "others"
