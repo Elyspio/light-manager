@@ -1,6 +1,7 @@
 import {LightEffect, LightService} from "./service";
 import {ColorMode, ColorRgb, Ip} from "./types";
 import {Helper} from "./helper";
+import {names, Room} from "../../config/lights";
 
 
 export interface ColorHsv {
@@ -15,7 +16,9 @@ export type LightData = {
 	brightness?: number,
 	powered?: boolean
 	id: number
-	port: number
+	port: number,
+	name: string,
+	room: Room
 };
 
 export class Light {
@@ -26,11 +29,13 @@ export class Light {
 	private service: LightService
 
 
-	private constructor(id: number, ip: Ip, port: number) {
+	private constructor(id: string, ip: Ip, port: number) {
 		this.data = {
 			ip,
-			id: Number.parseInt(id.toString()),
-			port
+			id: Number.parseInt(id),
+			port,
+			name: names[ip].name,
+			room: names[ip].room,
 		}
 	}
 
@@ -58,7 +63,11 @@ export class Light {
 		return this.data.powered
 	}
 
-	public static async get(id: number, ip: Ip, port: number) {
+	public get name(): string {
+		return this.data.name
+	}
+
+	public static async get(id: string, ip: Ip, port: number) {
 		return await new Light(id, ip, port).init();
 	}
 

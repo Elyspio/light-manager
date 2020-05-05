@@ -19,6 +19,7 @@ export class LightManager extends EventEmitter {
 	private constructor() {
 		super();
 		this.lights = [];
+		const self = this;
 
 		const callback = async () => {
 			const release = await mutex.acquire();
@@ -31,11 +32,10 @@ export class LightManager extends EventEmitter {
 					console.log(`${lamp.ip} is a new lamp`)
 				}
 			}
-			await this.addLight(news);
+			await self.addLight(news);
 			release();
 		}
 
-		const self = this;
 		store.subscribe(callback);
 		setTimeout(() => {
 			console.log("timeout");
@@ -92,7 +92,7 @@ export class LightManager extends EventEmitter {
 		for (let datum of data) {
 
 			if (this.lights.map(l => l.ip).includes(datum.ip) === false) {
-				this.lights.push(await Light.get(datum.id, datum.ip, datum.port))
+				this.lights.push(await Light.get(datum.id.toString(), datum.ip, datum.port))
 				console.log("added", datum)
 				refresh = true;
 			}

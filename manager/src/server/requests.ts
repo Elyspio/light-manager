@@ -4,7 +4,6 @@ import {ColorRgb} from "../module/light/types";
 export interface LightRequest extends Express.Request {
 	params: {
 		lightIp: string,
-
 	}
 }
 
@@ -20,4 +19,10 @@ export interface SetColorRequest extends LightRequest {
 
 export interface ToggleRequest extends LightRequest {
 
+}
+
+export interface SwitchAllRequest extends Express.Request {
+	query: {
+		state: string
+	}
 }

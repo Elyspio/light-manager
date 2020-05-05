@@ -1,5 +1,5 @@
 import socketIO from "socket.io-client"
+import {serverURL} from "../config/sockets";
 
-const serverUrl = "localhost:4000"
 
-export const socket = socketIO(serverUrl)
+export const socket = socketIO(serverURL)

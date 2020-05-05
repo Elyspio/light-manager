@@ -16,6 +16,7 @@
 	},
 	"devDependencies": {
 		"@types/express": "^4.17.6",
+		"source-map-support": "latest",
 		"@types/node": "latest",
 		"@types/socket.io": "^2.1.4",
 		"nodemon": "latest",
@@ -24,8 +25,9 @@
 		"typescript": "latest"
 	},
 	"scripts": {
-		"start-back": "nodemon build/app.js",
+		"start-back": "nodemon --inspect -r source-map-support/register  -- --trace-warnings build/app.js",
 		"build-back": "tsc",
-		"dist-back": "pkg --target node14 build/app.js"
+		"dist-back": "pkg --out-dir release build/app.js",
+		"push": "scp -r src/* pi@elyspi:/home/pi/light-manager/manager/src"
 	}
 }

@@ -17,9 +17,17 @@ const defaultState: LightState = {
 
 export const reducer = createReducer<LightState>(defaultState, (builder: ActionReducerMapBuilder<LightState>) => {
 	builder.addCase(addLight, (state, action) => {
-		if (state.lights.find(l => l.ip === action.payload.ip) === undefined) {
-			state.lights.push(action.payload);
+
+		for (const light of action.payload) {
+			let index = state.lights.findIndex(l => l.ip === light.ip);
+			if (index === -1) {
+				state.lights.push(light);
+			} else {
+				state.lights[index] = light;
+			}
 		}
+
+
 	})
 
 	builder.addCase(refreshLight, (state, action) => {
@@ -29,12 +37,13 @@ export const reducer = createReducer<LightState>(defaultState, (builder: ActionR
 })
 
 
-socket.on(socketEvents.update, (lights: LightData[]) => {
-	lights.forEach(light => store.dispatch(addLight(light)));
+socket.on(socketEvents.updateAll, (lights: LightData[]) => {
+	console.log("UPDATE ALL from server", lights);
+	store.dispatch(addLight(lights))
 })
 
 socket.on(socketEvents.updateLight, async (ip: Ip) => {
-	const refreshed = await LightService.refresh({ip: ip})
+	const refreshed = await LightService.instance.refresh({ip: ip})
 	store.dispatch(refreshLight(refreshed))
 })
 

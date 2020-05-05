@@ -1,6 +1,10 @@
 .Light {
-	display: grid !important;
-	width: fit-content !important;
-	grid-template-columns: 2fr 1fr 1fr 1fr;
-	grid-column-gap: 0.5rem;
+	display: flex;
+	width: 33rem;
+	justify-content: space-evenly;
+	align-items: center;
+
+	p {
+		width: 9rem;
+	}
 }

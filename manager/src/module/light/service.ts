@@ -199,7 +199,9 @@ export class LightService {
 			const cb = (message) => {
 				// console.log("interact", message.toString());
 				this.tcp.client.off("data", cb);
-				let raw: TcpLightResponse = JSON.parse(message.toString());
+				let messages = message.toString().split("\r\n");
+
+				let raw: TcpLightResponse = JSON.parse(messages[0]);
 				if (raw.error) {
 					reject(raw);
 				}

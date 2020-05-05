@@ -1,7 +1,9 @@
 import {createSocket} from "dgram";
 import {store} from "../../store";
-import {addLight} from "../../store/light/action";
+import {addLights} from "../../store/light/action";
 import {networkInterfaces} from "os";
+import {inetAdress} from "../../config/udp";
+import {discoverRefresh} from "../../config/lights";
 
 
 const allInterfaces = networkInterfaces();
@@ -13,7 +15,7 @@ export const discover = () => {
 	const udpServer = createSocket("udp4");
 	let address = "239.255.255.250";
 	udpServer.bind(udpPort, () => {
-		udpServer.setMulticastInterface("192.168.0.40");
+		udpServer.setMulticastInterface(inetAdress);
 		udpServer.addMembership(address);
 	});
 	udpServer.on("listening", () => {
@@ -35,7 +37,7 @@ export const discover = () => {
 
 			if (pairs["Location"] && pairs["id"]) {
 				let id = pairs["id"], [ip, port] = pairs["Location"].match(/([0-9]{1,3}\.*){4}/gm);
-				store.dispatch(addLight({id, ip, port}))
+				store.dispatch(addLights({id, ip, port}))
 			}
 
 		}
@@ -48,10 +50,14 @@ export const discover = () => {
 		'MAN: "ssdp:discover"',
 		"ST: wifi_bulb"]
 
-	udpServer.send(askMessage.join("\r\n"), udpPort, address, (error, bitmap) => {
-		if (error) {
-			console.error("error in udp send", error);
-			throw  error
-		}
-	});
+
+	setInterval(() => {
+		udpServer.send(askMessage.join("\r\n"), udpPort, address, (error) => {
+			if (error) {
+				console.error("error in udp send", error);
+				throw  error
+			}
+		});
+	}, discoverRefresh)
+
 }
