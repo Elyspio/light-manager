@@ -1,5 +1,8 @@
 import {LightData} from "../../../manager/src/module/light/light";
 import {minDelay, serverURL} from "../config/sockets";
+import store from "../store";
+
+export type LightPreset = "day" | "night"
 
 export class LightService {
 
@@ -30,6 +33,18 @@ export class LightService {
 		return fetch(`${this.base}/switch?state=${state}`, {method: "GET"})
 	}
 
+
+	public async setPreset(theme: LightPreset, light?: Pick<LightData, "ip">) {
+		if(light === undefined) {
+			const lights = store.getState().light.lights;
+			for (const light of lights) {
+				await fetch(`${this.base}/${light.ip}/preset/${theme}`, {method: "GET"})
+			}
+		}
+		else {
+			return await fetch(`${this.base}/${light.ip}/preset/${theme}`, {method: "GET"})
+		}
+	}
 
 	private iCanCall = () => {
 		const able = Date.now() > this.lastCall + minDelay;

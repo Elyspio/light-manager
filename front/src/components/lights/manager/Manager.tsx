@@ -14,6 +14,7 @@ import "./Manager.scss";
 import {Room} from "../../../../../manager/src/config/lights";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import {LightService} from "../../../model/LightService";
+import CommonActions from "../common/Common";
 
 interface StateProps {
 	lights: LightData[]
@@ -58,24 +59,7 @@ class Manager extends Component<StateProps & DispatchProps> {
 
 		return (
 			<Box className={"Manager"}>
-				<ExpansionPanel>
-					<ExpansionPanelSummary className={"header"}>
-						<Typography variant={"h6"}>
-							Common
-						</Typography>
-					</ExpansionPanelSummary>
-					<ExpansionPanelDetails className={"Light common"}>
-						<Button variant={"outlined"}
-						        onClick={() => LightService.instance.switchAll(true)}
-						        color={"primary"}>Allumer</Button>
-						<Button variant={"outlined"}>Day</Button>
-						<Button variant={"outlined"}>Night</Button>
-						<Button variant={"outlined"}
-						        onClick={() => LightService.instance.switchAll(false)}
-						        color={"secondary"}>Eteindre</Button>
-					</ExpansionPanelDetails>
-
-				</ExpansionPanel>
+				<CommonActions/>
 				<ExpansionPanel>
 					<ExpansionPanelSummary
 						className={"header"}>

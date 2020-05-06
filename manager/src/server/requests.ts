@@ -1,5 +1,6 @@
 import {ColorRgb} from "../module/light/types";
 
+type LightPreset = "day" | "night"
 
 export interface LightRequest extends Express.Request {
 	params: {
@@ -7,7 +8,7 @@ export interface LightRequest extends Express.Request {
 	}
 }
 
-export interface SetColorRequest extends LightRequest {
+export type SetColorRequest = LightRequest &  {
 	body: {
 		color: {
 			rgb?: ColorRgb,
@@ -24,5 +25,11 @@ export interface ToggleRequest extends LightRequest {
 export interface SwitchAllRequest extends Express.Request {
 	query: {
 		state: string
+	}
+}
+
+export type PresetRequest = LightRequest & {
+	params: {
+		preset: LightPreset
 	}
 }

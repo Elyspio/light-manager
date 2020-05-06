@@ -14,7 +14,6 @@
 		"pretty": true,
 		"watch": true,
 		"removeComments": true,
-		"alwaysStrict": true
 	},
 	"compileOnSave": true,
 	"exclude": [
@@ -25,4 +24,5 @@
 	"include": [
 		"src"
 	]
+
 }

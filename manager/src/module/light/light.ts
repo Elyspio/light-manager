@@ -71,16 +71,21 @@ export class Light {
 		return await new Light(id, ip, port).init();
 	}
 
+
+	public async setHsv(color: { hue: number, sat: number }, effect?: LightEffect, duration?: number) {
+		if (this.data.mode !== ColorMode.TurnHsv)
+			await this.service.setPower(true, ColorMode.TurnHsv);
+		await this.service.setHsv(color.hue, color.sat, duration, effect)
+	}
+
 	public async setColor(color: ColorRgb, effect?: LightEffect, duration?: number) {
 
-		if ((color as ColorRgb).r !== undefined) {
-			if (this.mode !== ColorMode.TurnRgb) {
-				await this.service.setPower(true, ColorMode.TurnRgb, duration, effect)
-			} else if (this.powered === false) {
-				await this.service.toggle()
-			}
-			await this.service.setRgb(color as ColorRgb, duration, effect)
+		if (this.mode !== ColorMode.TurnRgb) {
+			await this.service.setPower(true, ColorMode.TurnRgb, duration, effect)
+		} else if (this.powered === false) {
+			await this.service.toggle()
 		}
+		await this.service.setRgb(color, duration, effect)
 
 		this.data.color = color;
 		this.data.powered = true;
@@ -136,6 +141,10 @@ export class Light {
 			return true;
 		}
 		return false;
+	}
+
+	async setMode(mode: ColorMode) {
+		return this.service.setPower(true, mode);
 	}
 }
 

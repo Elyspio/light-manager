@@ -1,12 +1,14 @@
 import {Router} from "express";
 import {LightManager} from "../module/light/manager";
 import {
-	LightRequest,
+	LightRequest, PresetRequest,
 	SetColorRequest,
 	SwitchAllRequest,
 	ToggleRequest
 } from "./requests";
 import {Responses} from "./responses";
+import {presets} from "../config/lights";
+import {ColorMode} from "../module/light/types";
 
 export const lightRouter = Router();
 
@@ -58,6 +60,25 @@ lightRouter.get("/:lightIp", async (req: LightRequest, res) => {
 		return;
 	}
 	res.send(JSON.stringify(light.json()))
+})
+
+lightRouter.get("/:lightIp/preset/:preset", async (req: PresetRequest, res) => {
+	const light = manager.get(req.params.lightIp)
+	if (light === undefined) {
+		Responses.unknownLight(res, req.params.lightIp);
+		return;
+	}
+
+
+	switch (req.params.preset) {
+		case "day":
+			await light.setHsv(presets.day.value, "sudden", 1)
+			break;
+		case "night":
+			await light.setColor(presets.night.value, "sudden", 1)
+			break;
+	}
+	setTimeout(() => Responses.ok(res, light), 100)
 })
 
 lightRouter.get("/", async (req, res) => {

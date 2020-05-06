@@ -25,7 +25,7 @@
 		"typescript": "latest"
 	},
 	"scripts": {
-		"start-back": "nodemon --inspect -r source-map-support/register  -- --trace-warnings build/app.js",
+		"start-back": "nodemon  --inspect  build/app.js",
 		"build-back": "tsc",
 		"dist-back": "pkg --out-dir release build/app.js",
 		"push": "scp -r src/* pi@elyspi:/home/pi/light-manager/manager/src"

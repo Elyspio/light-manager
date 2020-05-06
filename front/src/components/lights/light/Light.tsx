@@ -57,9 +57,11 @@ class Light extends React.Component<Props, State> {
 				<Typography>{data.name}</Typography>
 				{toggle}
 				<Button variant={"outlined"}
-				        disabled={true || this.state.lock}>Day</Button>
+				        onClick={() => LightService.instance.setPreset("day", this.props.data)}
+				disabled={this.state.lock}>Day</Button>
 				<Button variant={"outlined"}
-				        disabled={true || this.state.lock}>Night</Button>
+				        onClick={() => LightService.instance.setPreset("night", this.props.data)}
+				disabled={this.state.lock}>Night</Button>
 				<IconButton onClick={this.lock}>{this.state.lock ? <LockIcon/> :
 					<LockOpenIcon/>}</IconButton>
 			</ExpansionPanelDetails>

@@ -1,5 +1,7 @@
-export const refreshRate = 2000;
-export const discoverRefresh = 2000;
+import {ColorMode} from "../module/light/types";
+
+export const refreshRate = 5000;
+export const discoverRefresh = 10000;
 
 
 export const names: { [key: string]: { name: string, room: Room } } = {
@@ -15,3 +17,21 @@ export const names: { [key: string]: { name: string, room: Room } } = {
 }
 
 export type Room = "living room" | "chambers" | "others"
+
+export const presets = {
+	day: {
+		mode: ColorMode.TurnHsv,
+		value: {
+			hue: 0,
+			sat: 0,
+		}
+	},
+	night: {
+		mode: ColorMode.TurnRgb,
+		value: {
+			r: 255,
+			g: 161,
+			b: 72
+		}
+	}
+}
