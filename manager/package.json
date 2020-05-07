@@ -22,12 +22,13 @@
 		"nodemon": "latest",
 		"pkg": "latest",
 		"ts-node": "^8.10.1",
-		"typescript": "latest"
+		"typescript": "latest",
+		"pm2": "^4.4.0"
 	},
 	"scripts": {
 		"start-back": "nodemon  --inspect  build/app.js",
-		"build-back": "tsc",
+		"build-back": "nodemon -e ts,json --watch \"./src\" -x \"tsc\"",
 		"dist-back": "pkg --out-dir release build/app.js",
-		"push": "scp -r src/* pi@elyspi:/home/pi/light-manager/manager/src"
+		"deploy": "bash ./deploy.sh"
 	}
 }
