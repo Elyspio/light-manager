@@ -1,5 +1,5 @@
 import {ActionReducerMapBuilder, createReducer} from "@reduxjs/toolkit"
-import {addLight, refreshLight} from "./action";
+import {addLight, refreshLight, setForDetail} from "./action";
 import {LightData} from "../../../../../manager/src/module/light/light";
 import {socket} from "../../../model/socket";
 import {socketEvents} from "../../../config/sockets";
@@ -9,10 +9,12 @@ import {Ip} from "../../../../../manager/src/module/light/types";
 
 export interface LightState {
 	lights: LightData[];
+	current?: LightData
 }
 
 const defaultState: LightState = {
-	lights: []
+	lights: [],
+	current: undefined
 };
 
 export const reducer = createReducer<LightState>(defaultState, (builder: ActionReducerMapBuilder<LightState>) => {
@@ -26,8 +28,10 @@ export const reducer = createReducer<LightState>(defaultState, (builder: ActionR
 				state.lights[index] = light;
 			}
 		}
+	})
 
-
+	builder.addCase(setForDetail, (state, action) => {
+		state.current = state.lights.find(l => l.ip === action.payload);
 	})
 
 	builder.addCase(refreshLight, (state, action) => {
@@ -48,19 +52,3 @@ socket.on(socketEvents.updateLight, async (ip: Ip) => {
 })
 
 
-// setInterval(async () => {
-// 	const data: LightData[] = await LightService.refreshAll()
-// 	const state = store.getState().light.lights;
-// 	for (const light of data) {
-// 		const currentState = state.find(l => l.ip === light.ip);
-// 		if (currentState === undefined) {
-// 			addLight(light);
-// 		} else {
-// 			if (!LightService.equal(light, currentState)) {
-// 				refreshLight(light);
-// 			}
-// 		}
-// 	}
-//
-//
-// }, refreshRate)

@@ -1,0 +1,19 @@
+.Light {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+
+	.name {
+		margin-left: 2rem;
+		font-size: 1.2rem;
+	}
+
+	.btn-power {
+		position: relative;
+		right: 2rem;
+		font-size: 1.5rem;
+	}
+
+}
+

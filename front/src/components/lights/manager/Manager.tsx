@@ -2,19 +2,10 @@ import React, {Component} from 'react';
 import {RootState} from "../../../store/reducer";
 import {connect} from "react-redux";
 import {LightData} from "../../../../../manager/src/module/light/light";
-import {
-	Box,
-	Button,
-	ExpansionPanelDetails,
-	ExpansionPanelSummary,
-	Typography
-} from "@material-ui/core";
-import Light from "../light/Light";
 import "./Manager.scss";
 import {Room} from "../../../../../manager/src/config/lights";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import {LightService} from "../../../model/LightService";
-import CommonActions from "../common/Common";
+import {Board} from "../Board";
+import Light from "./Light";
 
 interface StateProps {
 	lights: LightData[]
@@ -54,42 +45,21 @@ class Manager extends Component<StateProps & DispatchProps> {
 
 	render() {
 
-		const {chambers, others, "living room": livingRoom} = this.group();
+			const lights = [...this.props.lights].sort((a: LightData, b: LightData) => {
+				if (a.room < b.room) {
+					return -1
+				} else if (a.room === b.room) {
+					return a.name < b.name ? -1 : 1;
+				} else {
+					return 1;
+				}
+			});
 
 
 		return (
-			<Box className={"Manager"}>
-				<CommonActions/>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
-						className={"header"}>
-						<Typography variant={"h6"}>
-							Chambres
-						</Typography>
-					</ExpansionPanelSummary>
-					{chambers.map(d => <Light key={d.ip} data={d}/>)}
-				</ExpansionPanel>
-				<ExpansionPanel>
-					<ExpansionPanelSummary
-						className={"header"}>
-						<Typography variant={"h6"}>
-							Salon
-						</Typography>
-					</ExpansionPanelSummary>
-					{livingRoom.map(d => <Light key={d.ip} data={d}/>)}
-				</ExpansionPanel>
-
-				<ExpansionPanel>
-					<ExpansionPanelSummary
-						className={"header"}>
-						<Typography variant={"h6"}>
-							Autres
-						</Typography>
-					</ExpansionPanelSummary>
-					{others.map(d => <Light key={d.ip} data={d}/>)}
-				</ExpansionPanel>
-
-			</Box>
+			<Board className={"Manager"} title={"Lampes"}>
+				{lights.map(l => <Light key={l.id} data={l}/>)}
+			</Board>
 		);
 	}
 }

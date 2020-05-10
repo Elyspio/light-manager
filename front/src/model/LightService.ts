@@ -35,13 +35,12 @@ export class LightService {
 
 
 	public async setPreset(theme: LightPreset, light?: Pick<LightData, "ip">) {
-		if(light === undefined) {
+		if (light === undefined) {
 			const lights = store.getState().light.lights;
 			for (const light of lights) {
 				await fetch(`${this.base}/${light.ip}/preset/${theme}`, {method: "GET"})
 			}
-		}
-		else {
+		} else {
 			return await fetch(`${this.base}/${light.ip}/preset/${theme}`, {method: "GET"})
 		}
 	}
@@ -51,7 +50,7 @@ export class LightService {
 		if (able) {
 			this.lastCall = Date.now();
 		} else {
-			throw `You need to wait ${(Date.now() - this.lastCall) / 1000}s before the next API call`
+			throw new Error(`You need to wait ${(Date.now() - this.lastCall) / 1000}s before the next API call`)
 		}
 		return able;
 	}
