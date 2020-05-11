@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Box, Button, IconButton, Typography} from "@material-ui/core";
+import {Box, IconButton, Typography} from "@material-ui/core";
 import {LightData} from "../../../../../manager/src/module/light/light";
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import "./Light.scss"
@@ -11,19 +11,19 @@ import {Ip} from "../../../../../manager/src/module/light/types";
 import {connect, ConnectedProps} from "react-redux";
 
 
+const mapStateToProps = (state: RootState) => ({
+	theme: state.theme.current
+})
 
-
-
-const mapStateToProps = (state: RootState) => ({a: 1})
 const mapDispatchToProps = (dispatch: Dispatch) => ({
 	setSelected: (l: Ip) => dispatch(setForDetail(l))
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
-type ReduxTypes = ConnectedProps<typeof  connector>;
+type ReduxTypes = ConnectedProps<typeof connector>;
 
 
-interface Props extends  ReduxTypes {
+interface Props extends ReduxTypes {
 	data: LightData
 }
 
@@ -33,19 +33,28 @@ class Light extends Component<Props> {
 
 		const available = data.connected;
 
+		const theme = this.props.theme;
+
 		return (
-			<Box className={"Light"}  onClick={this.setSelected}>
+			<Box className={`Light ${theme}`} onClick={this.setSelected}>
 				<Typography className={"name"}>{data.name}</Typography>
-				<IconButton  disabled={!available} onClick={() => LightService.instance.toggle(data)} className={"btn-power"}>
+				<IconButton disabled={!available}
+				            onClick={this.onPowerClick}
+				            className={"btn-power"}>
 					<PowerSettingsNewIcon
-						style={data.powered ? {color: "orange"} : undefined}/>
+						style={data.powered ? {color: "orange"} : {}}/>
 				</IconButton>
 			</Box>
 		);
 	}
 
-	private setSelected = () => {
-	//	this.props.setSelected(this.props.data.ip);
+	private onPowerClick = async (e: any) => {
+		e.stopPropagation()
+		await LightService.instance.toggle(this.props.data);
+	}
+
+	private setSelected = (e) => {
+		this.props.setSelected(this.props.data.ip);
 	}
 }
 

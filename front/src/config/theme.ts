@@ -26,4 +26,4 @@ export const themes = {
 }
 
 
-
+export const getCurrentTheme = (): "dark" | "light" => new URL(window.location.toString()).searchParams.get("theme") || "light" as any;

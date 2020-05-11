@@ -1,62 +1,98 @@
 import * as React from 'react';
-import {LightData} from "../../../../../manager/src/module/light/light";
-import '../manager/Light.scss'
 import {RootState} from "../../../store/reducer";
-import {connect} from "react-redux";
-import {Board} from "../Board";
-
-export interface Props extends StateProps, DispatchProps {
-}
-
-interface StateProps {
-	current: LightData
-}
-
-interface DispatchProps {
-}
+import {connect, ConnectedProps} from "react-redux";
+import {Board, ThemeColor} from "../Board";
+import {Dispatch} from "redux";
+import {Box, Button, Slider, Typography} from "@material-ui/core";
+import "./Detail.scss"
+import {LightService} from "../../../model/LightService";
+import {LightData} from "../../../../../manager/src/module/light/light";
 
 const mapStateToProps = (state: RootState) => ({
-	current: state.light.current
-});
-// const mapDispatchToProps = (dispatch: Function) => ({
-// 	refresh: (data: LightData) => dispatch(refreshLight(data))
-// });
+	current: state.light.current as LightData,
+	theme: state.theme.current
+})
+const mapDispatchToProps = (dispatch: Dispatch) => ({})
 
-interface State {
-	lock: boolean,
-	open: boolean
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type ReduxTypes = ConnectedProps<typeof connector>;
+
+
+export interface Props {
 }
 
-class Detail extends React.Component<Props, State> {
 
-	state = {
-		lock: false,
-		open: false
-	}
+class Detail extends React.Component<Props & ReduxTypes> {
+
 
 	render() {
 		let {current: data} = this.props;
 
 		if (data === undefined) return null;
 
+		const colors: ThemeColor = {
+			dark: {
+				fg: "#FFF",
+				bg: "#005683"
+			},
+			light: {
+				fg: "#fff",
+				bg: "#62727b"
+			}
+		}
+
+
+		let marks = [{label: "1%", value: 1}, {label: "100%", value: 100}];
 		return (
-			<Board title={`Lampe : ${data.name}`}>
-				info
-				couleurs
+			<Board className={"Detail"} title={`Lampe : ${data.name}`}>
+				<Board title={"Couleurs"} color={colors}
+				       border={false}
+				       expansionable>
+					<Typography>Disabled Expansion Panel</Typography>
+				</Board>
+
+				<Board title={"Informations"} color={colors}
+				       expanded
+				       border={false}
+				       expansionable>
+					<Box className={"state"}>
+						<Typography>Etats</Typography>
+						<Button onClick={() => this.setLightState(true)}>
+							Allumer
+						</Button>
+						<Button onClick={() => this.powerOnly()}>
+							Eteindre les autres
+						</Button>
+						<Button onClick={() => this.setLightState(false)}>
+							Eteindre
+						</Button>
+					</Box>
+					<Box className={"luminosity"}>
+						<Typography>Luminosité</Typography>
+						<Slider
+							marks={marks}
+							defaultValue={this.props.current?.brightness}
+							min={0}
+							max={100}
+							valueLabelDisplay="auto"
+							onChange={(e, v) => this.onBrighnessChange(v as number)}
+						/>
+					</Box>
+				</Board>
 			</Board>
 		);
 	}
 
-	private lock = () => {
-		this.setState(prev => ({
-			lock: !prev.lock
-		}))
+	private onBrighnessChange = async (value: number) => {
+		await LightService.instance.setBrighness(this.props.current, value)
 	}
 
+	private setLightState = (state: boolean) => LightService.instance.setState(this.props.current, state)
 
-	private show = () => {
-		this.setState(prev => ({open: !prev.open}))
+	private powerOnly = async () => {
+		await LightService.instance.powerOnly(this.props.current)
 	}
 }
 
-export default connect(mapStateToProps, null)(Detail) as any
+export default connector(Detail) as any
