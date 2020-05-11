@@ -8,6 +8,7 @@ import {
 } from "./types";
 import {Light, LightData} from "./light";
 import {Helper} from "./helper";
+import {logger} from "../../util/logger";
 
 
 export type LightEffect = "sudden" | "smooth"
@@ -39,10 +40,24 @@ export class LightService {
 				const response = await instance.getProps()
 				console.log("data", response);
 				resolve({
-					data: LightService.convertProps(response),
+					data: {...LightService.convertProps(response), connected: true},
 					service: instance
 				});
 			})
+
+			instance.tcp.client.on("end", (e) => {
+				console.error(`Connection with ${instance.light.ip} ended`,  e)
+				light.setConnected(false)
+				instance.tcp.client.setTimeout(1000, () => {
+					instance.tcp.client.connect({
+						host: instance.light.ip,
+						port: instance.light.port
+					})
+					light.setConnected(true);
+
+				})
+			})
+
 		});
 	}
 
@@ -219,7 +234,7 @@ export class LightService {
 					//  console.log("finish", data);
 					if (config?.timeout) {
 						setTimeout(() => {
-							// console.log("finish", data);
+							console.log("finish", data);
 							resolve(parse)
 						}, config.timeout)
 					} else {
@@ -235,7 +250,7 @@ export class LightService {
 			//console.log("data send to " + this.lights.ip, data);
 
 			data.params = data.params.filter(d => d !== undefined);
-
+			logger.info(data);
 			this.tcp.client.write(JSON.stringify(data) + "\r\n");
 		})
 

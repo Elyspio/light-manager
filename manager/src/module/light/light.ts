@@ -14,7 +14,8 @@ export type LightData = {
 	color?: ColorRgb,
 	mode?: ColorMode
 	brightness?: number,
-	powered?: boolean
+	powered?: boolean,
+	connected: boolean,
 	id: number
 	port: number,
 	name: string,
@@ -34,6 +35,7 @@ export class Light {
 			ip,
 			id: Number.parseInt(id),
 			port,
+			connected: false,
 			name: names[ip].name,
 			room: names[ip].room,
 		}
@@ -145,6 +147,17 @@ export class Light {
 
 	async setMode(mode: ColorMode) {
 		return this.service.setPower(true, mode);
+	}
+
+	setConnected(b: boolean) {
+		this.data.connected = b;
+	}
+
+
+	async setState(state: boolean) {
+		if(this.powered !== state) {
+			return this.toggle();
+		}
 	}
 }
 

@@ -1,8 +1,8 @@
-import {Light} from "../module/light/light";
+import {Light} from "../../module/light/light";
 import {Response} from "express";
-import {socketIoServer} from "../app";
-import {socketEvents} from "../config/socket";
-import {Ip} from "../module/light/types";
+import {socketIoServer} from "../../app";
+import {socketEvents} from "../../config/socket";
+import {Ip} from "../../module/light/types";
 
 export namespace Responses {
 	export const notSupported = (res: Response) => res.status(500).send({

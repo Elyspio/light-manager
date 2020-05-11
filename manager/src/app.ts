@@ -3,20 +3,36 @@ import {LightManager} from "./module/light/manager";
 import {Light} from "./module/light/light";
 import path from "path";
 import {Server} from "socket.io";
-import {urlencoded} from "body-parser";
+import {urlencoded, json} from "body-parser";
 import {socketEvents} from "./config/socket";
-import {lightRouter} from "./server/LightRouter";
+import {lightRouter} from "./server/light/LightRouter";
 import {Ip} from "./module/light/types";
 import {Express, static as expressStatic} from "express";
-
+import winston from "winston";
+import expressWinston from "express-winston";
+import {logFolder} from "./util/logger";
 const app = require('express')();
 const cors = require('cors')
 
 app.use(urlencoded({extended: true}));
+app.use(json());
 app.use(cors());
 app.use("/light", lightRouter)
 
-app.set("title", "toto");
+
+app.use(expressWinston.logger({
+	transports: [
+		new winston.transports.Console(),
+		new winston.transports.File({
+			dirname: logFolder,
+			filename: "express.log"
+		})
+	],
+	format: winston.format.combine(
+		winston.format.json()
+	),
+}));
+
 
 const server = require('http').Server(app);
 export const socketIoServer: Server = require('socket.io')(server);
