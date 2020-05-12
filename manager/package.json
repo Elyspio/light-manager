@@ -34,6 +34,6 @@
 		"start-back": "nodemon  --inspect  build/app.js",
 		"build-back": "nodemon -e ts,json --watch \"./src\" -x \"tsc\"",
 		"dist-back": "pkg --out-dir release build/app.js",
-		"deploy": "bash ./deploy.sh"
+		"deploy": "powershell ./deploy.ps1"
 	}
 }

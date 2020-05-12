@@ -6,7 +6,7 @@ export const logFolder = path.resolve(__dirname, "..", "..", "logs");
 fs.ensureDirSync(logFolder)
 
 export const logger = winston.createLogger({
-	transports: [ new winston.transports.File({dirname: logFolder, filename: "log.log"})],
+	transports: [ new winston.transports.File({dirname: logFolder, filename: "log.log"}), new winston.transports.Console()],
 	format: winston.format.combine(
 		winston.format.json()
 	),

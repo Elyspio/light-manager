@@ -8,24 +8,48 @@ import {
 } from "./types";
 import {Light, LightData} from "./light";
 import {Helper} from "./helper";
-import {logger} from "../../util/logger";
 
 
 export type LightEffect = "sudden" | "smooth"
 
 export class LightService {
 
+	private static requestId = 0;
 
 	private tcp: {
 		client: Socket
+		returns: Map<number, { call: Pick<LampParam, "params" | "method">, callback: (data: LampSocketReturn) => void }>
 	}
 	private light: Light;
 
 	private constructor(light: Light) {
 		this.light = light;
 		this.tcp = {
-			client: new Socket()
+			client: new Socket(),
+			returns: new Map()
 		}
+
+		this.tcp.client.on("data", data => {
+
+			const raw = JSON.parse(data.toString());
+			console.log("TCP return from lamp", raw)
+			if (raw.result) {
+				const parse: LampSocketReturn = {
+					result: raw.result.map(r => {
+						const converted = Number.parseFloat(r);
+						if (Number.isNaN(converted)) return r
+						return converted;
+					}),
+					id: raw.id
+				};
+
+				const callback = this.tcp.returns.get(parse.id)?.callback;
+				if (callback) {
+					callback(parse);
+				}
+			}
+		})
+
 	}
 
 	public static async init(light: Light): Promise<{ data: Partial<LightData>, service: LightService }> {
@@ -40,13 +64,16 @@ export class LightService {
 				const response = await instance.getProps()
 				console.log("data", response);
 				resolve({
-					data: {...LightService.convertProps(response), connected: true},
+					data: {
+						...LightService.convertProps(response),
+						connected: true
+					},
 					service: instance
 				});
 			})
 
 			instance.tcp.client.on("end", (e) => {
-				console.error(`Connection with ${instance.light.ip} ended`,  e)
+				console.error(`Connection with ${instance.light.ip} ended`, e)
 				light.setConnected(false)
 				instance.tcp.client.setTimeout(1000, () => {
 					instance.tcp.client.connect({
@@ -92,7 +119,6 @@ export class LightService {
 		let data = await this.interact({
 			method: "get_prop",
 			params: props,
-			id: this.light.id
 		});
 		if (data.result) {
 			return LightService.convert(data.result, props) as { [key in LampProperty]: string | number };
@@ -105,7 +131,6 @@ export class LightService {
 		return this.interact({
 			method: "set_rgb",
 			params: [Helper.convertColor(color), effect, duration],
-			id: this.light.id
 		}, {timeout: duration})
 	}
 
@@ -113,7 +138,6 @@ export class LightService {
 		return this.interact({
 			method: "set_ct_abx",
 			params: [ct_value, effect, duration],
-			id: this.light.id
 		}, {timeout: duration})
 	}
 
@@ -121,7 +145,6 @@ export class LightService {
 		return this.interact({
 			method: "set_hsv",
 			params: [hue, sat, effect, duration],
-			id: this.light.id
 		}, {timeout: duration})
 	}
 
@@ -129,7 +152,6 @@ export class LightService {
 		return this.interact({
 			method: "set_bright",
 			params: [brightness, effect, duration],
-			id: this.light.id
 		}, {timeout: duration})
 	}
 
@@ -137,7 +159,6 @@ export class LightService {
 		return this.interact({
 			method: "set_power",
 			params: [state ? "on" : "off", effect, duration, mode],
-			id: this.light.id
 		}, {timeout: duration})
 	}
 
@@ -145,7 +166,6 @@ export class LightService {
 		return this.interact({
 			method: "set_scene",
 			params: [cls, ...values],
-			id: this.light.id
 		})
 	}
 
@@ -153,7 +173,6 @@ export class LightService {
 		return this.interact({
 			method: "set_default",
 			params: [],
-			id: this.light.id
 		})
 	}
 
@@ -161,7 +180,6 @@ export class LightService {
 		return this.interact({
 			method: "toggle",
 			params: [],
-			id: this.light.id
 		})
 	}
 
@@ -169,7 +187,6 @@ export class LightService {
 		return this.interact({
 			method: "cron_add",
 			params: [type, value],
-			id: this.light.id
 		})
 	}
 
@@ -177,7 +194,6 @@ export class LightService {
 		return this.interact({
 			method: "cron_get",
 			params: [type],
-			id: this.light.id
 		})
 	}
 
@@ -185,7 +201,6 @@ export class LightService {
 		return this.interact({
 			method: "cron_del",
 			params: [type],
-			id: this.light.id
 		})
 	}
 
@@ -193,7 +208,6 @@ export class LightService {
 		return this.interact({
 			method: "set_music",
 			params: [action, host, port],
-			id: this.light.id
 		})
 	}
 
@@ -201,7 +215,6 @@ export class LightService {
 		return this.interact({
 			method: "set_name",
 			params: [name],
-			id: this.light.id
 		})
 	}
 
@@ -209,63 +222,34 @@ export class LightService {
 		return LightService.convertProps(await this.getProps());
 	}
 
-	private async interact(data: LampParam, config?: { timeout: number }): Promise<LampSocketReturn> {
+	private async interact(data: Pick<LampParam, "params" | "method">, config?: { timeout: number }): Promise<LampSocketReturn> {
 		return new Promise((resolve, reject) => {
-			const cb = (message) => {
-				// console.log("interact", message.toString());
-				this.tcp.client.off("data", cb);
-				let messages = message.toString().split("\r\n");
 
-				let raw: TcpLightResponse = JSON.parse(messages[0]);
-				if (raw.error) {
-					reject(raw);
+			const callback = (data: LampSocketReturn) => {
+				if (data.error) {
+					reject(data);
 				}
-
-				if (raw.result) {
-					const parse: LampSocketReturn = {
-						result: raw.result.map(r => {
-							const converted = Number.parseFloat(r);
-							if (Number.isNaN(converted)) return r
-							return converted;
-						}),
-						id: raw.id
-					};
-
-					//  console.log("finish", data);
-					if (config?.timeout) {
-						setTimeout(() => {
-							console.log("finish", data);
-							resolve(parse)
-						}, config.timeout)
-					} else {
-						// console.log("finish", data)
-						resolve(parse)
-					}
+				if (config?.timeout) {
+					setTimeout(() => resolve(data), config.timeout)
+				} else {
+					resolve(data);
 				}
-
-
 			}
-			this.tcp.client.on("data", cb)
-
-			//console.log("data send to " + this.lights.ip, data);
-
 			data.params = data.params.filter(d => d !== undefined);
-			logger.info(data);
-			this.tcp.client.write(JSON.stringify(data) + "\r\n");
+			let id = LightService.requestId;
+			this.tcp.returns.set(id, {call: data, callback: callback})
+
+			const request = {
+				...data,
+				id
+			}
+
+			console.info(request);
+			this.tcp.client.write(JSON.stringify(request) + "\r\n");
 		})
 
 	}
 
 }
 
-
 const proprieties = ["power", "bright", "ct", "rgb", "hue", "sat", "color_mode", "flowing", "delayoff", "flow_params", "music_on", "name"]
-
-interface TcpLightResponse {
-	id: number,
-	result?: string[],
-	error?: {
-		code: number,
-		message: string
-	}
-}
