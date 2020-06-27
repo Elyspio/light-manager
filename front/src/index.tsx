@@ -23,15 +23,15 @@ export interface Props {
 
 
 class AppContainer extends React.Component<Props & ReduxTypes> {
-	render() {
+    render() {
 
-		const theme = this.props.theme === "dark" ? themes.dark : themes.light;
-		return (
-			<ThemeProvider theme={theme}>
-				<Application/>
-			</ThemeProvider>
-		);
-	}
+        const theme = this.props.theme === "dark" ? themes.dark : themes.light;
+        return (
+            <ThemeProvider theme={theme}>
+                <Application/>
+            </ThemeProvider>
+        );
+    }
 }
 
 const App = connector(AppContainer) as any
@@ -39,12 +39,12 @@ const App = connector(AppContainer) as any
 
 // Render components
 const render = () => {
-	ReactDOM.render(
-		<Provider store={store}>
-			<App/>
-		</Provider>,
-		document.getElementById("root")
-	);
+    ReactDOM.render(
+        <Provider store={store}>
+            <App/>
+        </Provider>,
+        document.getElementById("root")
+    );
 };
 
 render();

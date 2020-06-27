@@ -3,163 +3,165 @@ import {ColorMode, ColorRgb, Ip} from "./types";
 import {Helper} from "./helper";
 import {names, Room} from "../../config/lights";
 
-
 export interface ColorHsv {
-	hue: number,
-	sat: number
+    hue: number;
+    sat: number;
 }
 
 export type LightData = {
-	ip: Ip,
-	color?: ColorRgb,
-	mode?: ColorMode
-	brightness?: number,
-	powered?: boolean,
-	connected: boolean,
-	id: number
-	port: number,
-	name: string,
-	room: Room
+    ip: Ip;
+    color?: ColorRgb;
+    mode?: ColorMode;
+    brightness?: number;
+    powered?: boolean;
+    connected: boolean;
+    id: number;
+    port: number;
+    name: string;
+    room: Room;
 };
 
+export type LightDataFull = Required<LightData>
+
 export class Light {
+    private data: LightData;
 
-	private data: LightData
+    private service: LightService;
 
+    private constructor(id: string, ip: Ip, port: number) {
+        this.data = {
+            ip,
+            id: Number.parseInt(id),
+            port,
+            connected: false,
+            name: names[ip].name,
+            room: names[ip].room,
+        };
+    }
 
-	private service: LightService
+    public get mode() {
+        return this.data.mode;
+    }
 
+    public get port(): Readonly<number> {
+        return this.data.port;
+    }
 
-	private constructor(id: string, ip: Ip, port: number) {
-		this.data = {
-			ip,
-			id: Number.parseInt(id),
-			port,
-			connected: false,
-			name: names[ip].name,
-			room: names[ip].room,
-		}
-	}
+    public get ip(): Readonly<Ip> {
+        return this.data.ip;
+    }
 
-	public get mode() {
-		return this.data.mode
-	}
+    public get color(): Readonly<ColorRgb | ColorHsv> {
+        return this.data.color;
+    }
 
-	public get port(): Readonly<number> {
-		return this.data.port;
-	}
+    public get id(): Readonly<number> {
+        return this.data.id;
+    }
 
-	public get ip(): Readonly<Ip> {
-		return this.data.ip;
-	}
+    public get powered(): boolean {
+        return this.data.powered;
+    }
 
-	public get color(): Readonly<ColorRgb | ColorHsv> {
-		return this.data.color;
-	}
+    public get name(): string {
+        return this.data.name;
+    }
 
-	public get id(): Readonly<number> {
-		return this.data.id;
-	}
+    public static async get(id: string, ip: Ip, port: number) {
+        return await new Light(id, ip, port).init();
+    }
 
-	public get powered(): boolean {
-		return this.data.powered
-	}
+    public async setHsv(
+        color: { hue: number; sat: number },
+        effect?: LightEffect,
+        duration?: number
+    ) {
+        if (this.data.mode !== ColorMode.TurnHsv)
+            await this.service.setPower(true, ColorMode.TurnHsv);
+        await this.service.setHsv(color.hue, color.sat, duration, effect);
+    }
 
-	public get name(): string {
-		return this.data.name
-	}
+    public async setColor(
+        color: ColorRgb,
+        effect?: LightEffect,
+        duration?: number
+    ) {
+        if (this.mode !== ColorMode.TurnRgb) {
+            await this.service.setPower(true, ColorMode.TurnRgb, duration, effect);
+        } else if (this.powered === false) {
+            await this.service.toggle();
+        }
+        await this.service.setRgb(color, duration, effect);
 
-	public static async get(id: string, ip: Ip, port: number) {
-		return await new Light(id, ip, port).init();
-	}
+        this.data.color = color;
+        this.data.powered = true;
+    }
 
+    public async setBrighness(
+        percentage: number,
+        effect: LightEffect = "sudden",
+        duration: number = 0
+    ) {
+        if (percentage < 1 || percentage > 100) {
+            throw "Invalid brightness percentage it must be: 1 <= percentage <= 100";
+        }
+        await this.service.setBright(percentage, duration, effect);
+    }
 
-	public async setHsv(color: { hue: number, sat: number }, effect?: LightEffect, duration?: number) {
-		if (this.data.mode !== ColorMode.TurnHsv)
-			await this.service.setPower(true, ColorMode.TurnHsv);
-		await this.service.setHsv(color.hue, color.sat, duration, effect)
-	}
+    public async toggle() {
+        await this.service.toggle();
+        this.data.powered = !this.data.powered;
+    }
 
-	public async setColor(color: ColorRgb, effect?: LightEffect, duration?: number) {
+    public async init(): Promise<Light> {
+        const {service, data} = await LightService.init(this);
+        this.data = {
+            ...this.data,
+            ...data,
+        };
+        this.service = service;
+        return this;
+    }
 
-		if (this.mode !== ColorMode.TurnRgb) {
-			await this.service.setPower(true, ColorMode.TurnRgb, duration, effect)
-		} else if (this.powered === false) {
-			await this.service.toggle()
-		}
-		await this.service.setRgb(color, duration, effect)
+    public json() {
+        return {
+            ...this.data,
+        };
+    }
 
-		this.data.color = color;
-		this.data.powered = true;
-	}
+    public async refresh(): Promise<boolean> {
+        const newData = await this.service.refresh();
+        const prevRawData = this.json();
+        const prevData: Partial<LightData> = {
+            brightness: prevRawData.brightness,
+            powered: prevRawData.powered,
+            color: prevRawData.color,
+            mode: prevRawData.mode,
+        };
 
-	public async setBrighness(percentage: number, effect: LightEffect = "sudden", duration: number = 0) {
-		if (percentage < 1 || percentage > 100) {
-			throw "Invalid brightness percentage it must be: 1 <= percentage <= 100"
-		}
-		await this.service.setBright(percentage, duration, effect)
-	}
+        const refresh = !Helper.equal(newData, prevData);
 
+        if (refresh) {
+            this.data = {
+                ...this.data,
+                ...newData,
+            };
+            return true;
+        }
+        return false;
+    }
 
-	public async toggle() {
-		await this.service.toggle();
-		this.data.powered = !this.data.powered;
-	}
+    async setMode(mode: ColorMode) {
+        return this.service.setPower(true, mode);
+    }
 
-	public async init(): Promise<Light> {
-		const {service, data} = await LightService.init(this);
-		this.data = {
-			...this.data,
-			...data
-		}
-		this.service = service;
-		return this;
-	}
+    setConnected(b: boolean) {
+        this.data.connected = b;
+    }
 
-
-	public json() {
-		return {
-			...this.data
-		}
-	}
-
-	public async refresh(): Promise<boolean> {
-		const newData = await this.service.refresh();
-		const prevRawData = this.json();
-		const prevData: Partial<LightData> = {
-			brightness: prevRawData.brightness,
-			powered: prevRawData.powered,
-			color: prevRawData.color,
-			mode: prevRawData.mode
-		}
-
-		const refresh = !Helper.equal(newData, prevData)
-
-		if (refresh) {
-			this.data = {
-				...this.data,
-				...newData
-			}
-			return true;
-		}
-		return false;
-	}
-
-	async setMode(mode: ColorMode) {
-		return this.service.setPower(true, mode);
-	}
-
-	setConnected(b: boolean) {
-		this.data.connected = b;
-	}
-
-
-	async setState(state: boolean) {
-		if(this.powered !== state) {
-			return this.toggle();
-		}
-	}
+    async setState(state: boolean) {
+        if (this.powered !== state) {
+            return this.toggle();
+        }
+    }
 }
-
-
-

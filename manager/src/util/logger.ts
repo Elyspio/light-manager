@@ -1,14 +1,17 @@
 import winston from "winston";
 import path from "path";
-import fs from "fs-extra"
+import fs from "fs-extra";
 
 export const logFolder = path.resolve(__dirname, "..", "..", "logs");
-fs.ensureDirSync(logFolder)
+fs.ensureDirSync(logFolder);
 
 export const logger = winston.createLogger({
-	transports: [ new winston.transports.File({dirname: logFolder, filename: "log.log"}), new winston.transports.Console()],
-	format: winston.format.combine(
-		winston.format.json()
-	),
-})
-
+    transports: [
+        new winston.transports.File({
+            dirname: logFolder,
+            filename: "log.log",
+        }),
+        new winston.transports.Console(),
+    ],
+    format: winston.format.combine(winston.format.json()),
+});

@@ -12,11 +12,11 @@ import {connect, ConnectedProps} from "react-redux";
 
 
 const mapStateToProps = (state: RootState) => ({
-	theme: state.theme.current
+    theme: state.theme.current
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-	setSelected: (l: Ip) => dispatch(setForDetail(l))
+    setSelected: (l: Ip) => dispatch(setForDetail(l))
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -24,38 +24,38 @@ type ReduxTypes = ConnectedProps<typeof connector>;
 
 
 interface Props extends ReduxTypes {
-	data: LightData
+    data: LightData
 }
 
 class Light extends Component<Props> {
-	render() {
-		const data = this.props.data;
+    render() {
+        const data = this.props.data;
 
-		const available = data.connected;
+        const available = data.connected;
 
-		const theme = this.props.theme;
+        const theme = this.props.theme;
 
-		return (
-			<Box className={`Light ${theme}`} onClick={this.setSelected}>
-				<Typography className={"name"}>{data.name}</Typography>
-				<IconButton disabled={!available}
-				            onClick={this.onPowerClick}
-				            className={"btn-power"}>
-					<PowerSettingsNewIcon
-						style={data.powered ? {color: "orange"} : {}}/>
-				</IconButton>
-			</Box>
-		);
-	}
+        return (
+            <Box className={`Light ${theme}`} onClick={this.setSelected}>
+                <Typography className={"name"}>{data.name}</Typography>
+                <IconButton disabled={!available}
+                            onClick={this.onPowerClick}
+                            className={"btn-power"}>
+                    <PowerSettingsNewIcon
+                        style={data.powered ? {color: "orange"} : {}}/>
+                </IconButton>
+            </Box>
+        );
+    }
 
-	private onPowerClick = async (e: any) => {
-		e.stopPropagation()
-		await LightService.instance.toggle(this.props.data);
-	}
+    private onPowerClick = async (e: any) => {
+        e.stopPropagation()
+        await LightService.instance.toggle(this.props.data);
+    }
 
-	private setSelected = (e) => {
-		this.props.setSelected(this.props.data.ip);
-	}
+    private setSelected = (e) => {
+        this.props.setSelected(this.props.data.ip);
+    }
 }
 
 export default connector(Light);

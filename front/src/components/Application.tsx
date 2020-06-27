@@ -11,8 +11,7 @@ import {toggleTheme} from "../store/module/theme/action";
 import Brightness3Icon from '@material-ui/icons/Brightness3';
 import Brightness5Icon from '@material-ui/icons/Brightness5';
 
-
-const mapStateToProps = (state: RootState) => ({theme: state.theme.current})
+const mapStateToProps = (state: RootState) => ({theme: state.theme.current, currentLight: state.light.current})
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({toggleTheme: () => dispatch(toggleTheme())})
 
@@ -24,24 +23,26 @@ export interface Props {
 
 class Application extends React.Component<Props & ReduxTypes> {
 
-	render() {
-		return (
-			<Paper square={true} className={"Application"}>
-				<div className={"left"}>
-					<Manager/>
-					<Common/>
-				</div>
-				<div className="right">
-					<Detail/>
-				</div>
-				<IconButton className={"toggleTheme"}
-				            onClick={this.props.toggleTheme}>
-					{this.props.theme === "dark" ? <Brightness5Icon/> :
-						<Brightness3Icon/>}
-				</IconButton>
-			</Paper>
-		);
-	}
+    render() {
+
+
+        return (
+            <Paper square={true} className={"Application"}>
+                <div className={"left"}>
+                    <Manager/>
+                    <Common/>
+                </div>
+                <div className="right">
+                    {this.props.currentLight ? <Detail/> : null}
+                </div>
+                <IconButton className={"toggleTheme"}
+                            onClick={this.props.toggleTheme}>
+                    {this.props.theme === "dark" ? <Brightness5Icon/> :
+                        <Brightness3Icon/>}
+                </IconButton>
+            </Paper>
+        );
+    }
 }
 
 export default connector(Application)

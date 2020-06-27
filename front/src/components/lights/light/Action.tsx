@@ -5,42 +5,42 @@ import {LightService} from "../../../model/LightService";
 
 
 interface Props {
-	data: LightData,
-	className?: string
+    data: LightData,
+    className?: string
 }
 
 export class Action extends Component<Props> {
 
-	render() {
-		const {data} = this.props;
-		const toggle = <Button
-			onClick={this.toggle}
-			variant={"outlined"}
-			color={data.powered ? "primary" : "secondary"}>
-			{data.powered ? "Eteindre" : "Allumer"}
-		</Button>
+    render() {
+        const {data} = this.props;
+        const toggle = <Button
+            onClick={this.toggle}
+            variant={"outlined"}
+            color={data.powered ? "primary" : "secondary"}>
+            {data.powered ? "Eteindre" : "Allumer"}
+        </Button>
 
-		return (
-			<ExpansionPanelDetails
-				className={"Action " + this.props.className ?? ""}>
-				{toggle}
+        return (
+            <ExpansionPanelDetails
+                className={"Action " + this.props.className ?? ""}>
+                {toggle}
 
-				<Button variant={"outlined"}
-				        onClick={() => LightService.instance.setPreset("day", data)}>
-					Day
-				</Button>
-				<Button variant={"outlined"}
-				        onClick={() => LightService.instance.setPreset("night", data)}>
-					Night
-				</Button>
+                <Button variant={"outlined"}
+                        onClick={() => LightService.instance.setPreset("day", data)}>
+                    Day
+                </Button>
+                <Button variant={"outlined"}
+                        onClick={() => LightService.instance.setPreset("night", data)}>
+                    Night
+                </Button>
 
 
-			</ExpansionPanelDetails>
-		);
-	}
+            </ExpansionPanelDetails>
+        );
+    }
 
-	private toggle = async () => {
-		await LightService.instance.toggle(this.props.data);
-	}
+    private toggle = async () => {
+        await LightService.instance.toggle(this.props.data);
+    }
 }
 

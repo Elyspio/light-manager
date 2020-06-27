@@ -6,28 +6,20 @@
 		"@material-ui/core": "^4.9.13",
 		"@material-ui/icons": "^4.9.1",
 		"@reduxjs/toolkit": "^1.3.5",
-		"@testing-library/jest-dom": "^5.5.0",
-		"@testing-library/react": "^10.0.4",
-		"@testing-library/user-event": "^10.1.0",
-		"@types/jest": "^25.2.1",
-		"@types/node": "^13.13.5",
-		"@types/react": "^16.9.34",
-		"@types/react-dom": "^16.9.7",
-		"node-sass": "^4.14.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-redux": "^7.2.0",
 		"react-scripts": "3.4.1",
 		"redux": "^4.0.5",
-		"socket.io-client": "^2.3.0",
-		"typescript": "latest"
+		"socket.io-client": "^2.3.0"
 	},
 	"scripts": {
 		"start-front": "react-scripts start",
 		"build-front": "react-scripts build",
 		"test-front": "react-scripts test",
 		"eject-front": "react-scripts eject",
-		"push-back": "scp -r build/* pi@elyspi:/home/pi/light-manager/front/build"
+		"push-back": "scp -r build/* pi@elyspi:/home/pi/light-manager/front/build",
+		"configure": "ts-node -P configure/tsconfig.json configure/config.ts "
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -44,7 +36,20 @@
 		]
 	},
 	"devDependencies": {
+		"@testing-library/jest-dom": "^5.5.0",
+		"@testing-library/react": "^10.0.4",
+		"@testing-library/user-event": "^10.1.0",
+		"@types/argparse": "^1.0.38",
+		"@types/cors": "^2.8.6",
+		"@types/jest": "^25.2.1",
+		"@types/node": "^13.13.5",
+		"@types/react": "^16.9.34",
+		"@types/react-dom": "^16.9.7",
 		"@types/react-redux": "^7.1.8",
-		"@types/socket.io-client": "^1.4.32"
+		"@types/socket.io-client": "^1.4.32",
+		"argparse": "^1.0.10",
+		"cross-env": "^7.0.2",
+		"node-sass": "^4.14.1",
+		"typescript": "latest"
 	}
 }

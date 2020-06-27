@@ -1,4 +1,23 @@
 {
+	"ts-node": {
+		"pretty": true,
+		"compilerOptions": {
+			"target": "ES5",
+			"moduleResolution": "node",
+			"lib": [
+				"ESNext",
+				"DOM"
+			],
+			"sourceMap": true,
+			"outDir": "build",
+			"esModuleInterop": true,
+			"experimentalDecorators": true,
+			"resolveJsonModule": true,
+			"pretty": true,
+			"removeComments": true,
+			"watch": true
+		}
+	},
 	"compilerOptions": {
 		"target": "ES5",
 		"moduleResolution": "node",
