@@ -1,5 +1,5 @@
 import {Socket} from "net";
-import {ColorMode, ColorRgb, LampParam, LampProperty, LampSocketReturn,} from "./types";
+import {ColorMode, ColorRgb, LampParam, LampProperty, LampSocket,} from "./types";
 import {Light, LightData} from "./light";
 import {Helper} from "./helper";
 import {error} from "winston";
@@ -15,7 +15,7 @@ export class LightService {
         returns: Map<number,
             {
                 call: Pick<LampParam, "params" | "method">;
-                callback: (data: LampSocketReturn) => void;
+                callback: (data: LampSocket.ok) => void;
             }>;
     };
     private light: Light;
@@ -27,24 +27,41 @@ export class LightService {
             returns: new Map(),
         };
 
-        this.tcp.client.on("data", (data) => {
-            const raw = JSON.parse(data.toString());
-            // console.log("TCP return from lamp", raw)
-            if (raw.result) {
-                const parse: LampSocketReturn = {
-                    result: raw.result.map((r) => {
-                        const converted = Number.parseFloat(r);
-                        if (Number.isNaN(converted)) return r;
-                        return converted;
-                    }),
-                    id: raw.id,
-                };
+        this.tcp.client.on("data", (raw) => {
 
-                const callback = this.tcp.returns.get(parse.id)?.callback;
-                if (callback) {
-                    callback(parse);
+            try {
+
+                const data: LampSocket.all[] = raw.toString()
+                    .split("\r\n")
+                    .slice(0, -1).map(datum => JSON.parse(datum));
+                const oks: LampSocket.ok[] = data.filter(obj => obj.result);
+                const errors: LampSocket.error[] = data.filter(obj => obj.error);
+
+                const handleError = obj => console.error("error in tcp recieve", obj);
+                const handleOk = (obj) => {
+                    const parse = {
+                        result: obj.result.map((r) => {
+                            const converted = Number.parseFloat(r);
+                            if (Number.isNaN(converted)) return r;
+                            return converted;
+                        }),
+                        id: obj.id,
+                    };
+
+
+                    const callback = this.tcp.returns.get(parse.id)?.callback;
+                    if (callback) {
+                        callback(parse);
+                    }
                 }
+
+                oks.forEach(handleOk);
+                errors.forEach(handleError)
+
+            } catch (e) {
+                console.error("error in tcp recieve data", raw.toString(), e)
             }
+
         });
     }
 
@@ -79,7 +96,7 @@ export class LightService {
                 });
             });
 
-            instance.tcp.client.on("error", err => (console.error(`ERROR : tcp for ${instance.light.ip} `, error)))
+            instance.tcp.client.on("error", err => (console.error(`ERROR : tcp for ${instance.light.ip} `, err)))
         });
     }
 
@@ -255,9 +272,9 @@ export class LightService {
     private async interact(
         data: Pick<LampParam, "params" | "method">,
         config?: { timeout: number }
-    ): Promise<LampSocketReturn> {
+    ): Promise<LampSocket.all> {
         return new Promise((resolve, reject) => {
-            const callback = (data: LampSocketReturn) => {
+            const callback = (data: LampSocket.all) => {
                 if (data.error) {
                     reject(data);
                 }

@@ -60,11 +60,20 @@ export type LampProperty =
     | "music_on"
     | "name";
 
-export type LampSocketReturn = {
-    id: number;
-    result?: ["ok"] | (number | string)[];
-    error?: { code: number; message: string };
-};
+export namespace LampSocket {
+
+    type base = {
+        id: number
+    }
+
+    export type ok = base & {
+        result: ["ok"] | (number | string)[];
+    }
+    export type error = base & {
+        error: { code: number; message: string };
+    }
+    export type all = base & ok & error;
+}
 
 export enum ColorMode {
     TurnOn,
