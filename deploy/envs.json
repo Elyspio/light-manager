@@ -1,0 +1,22 @@
+{
+	"dev": {
+		"front": {
+			"endpoints": {
+				"api": "http://localhost:4000/lights"
+			}
+		},
+		"manager": {
+			"multicast-interface": "Wi-Fi 2"
+		}
+	},
+	"prod": {
+		"front": {
+			"endpoints": {
+				"api": "http://elyspio.fr/api/lights"
+			}
+		},
+		"manager": {
+			"multicast-interface": "eth0"
+		}
+	}
+}

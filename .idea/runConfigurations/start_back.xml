@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="start-back" type="js.build_tools.npm" nameIsGenerated="true">
+  <configuration default="false" name="start-back" type="js.build_tools.npm">
     <package-json value="$PROJECT_DIR$/manager/package.json" />
     <command value="run" />
     <scripts>
-      <script value="start-back" />
+      <script value="start" />
     </scripts>
     <node-interpreter value="node" />
     <envs />

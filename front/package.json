@@ -14,12 +14,10 @@
 		"socket.io-client": "^2.3.0"
 	},
 	"scripts": {
-		"start-front": "react-scripts start",
-		"build-front": "react-scripts build",
-		"test-front": "react-scripts test",
-		"eject-front": "react-scripts eject",
-		"push-back": "scp -r build/* pi@elyspi:/home/pi/light-manager/front/build",
-		"configure": "ts-node -P configure/tsconfig.json configure/config.ts "
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": "react-app"

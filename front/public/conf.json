@@ -1,0 +1,5 @@
+{
+  "endpoints": {
+    "api": "http://elyspio.fr/api/lights"
+  }
+}

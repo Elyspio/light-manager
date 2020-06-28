@@ -34,9 +34,9 @@
 		"typescript": "latest"
 	},
 	"scripts": {
-		"start-back": "nodemon  src/app.ts",
-		"build-back": "nodemon -e ts,json --watch \"./src\" -x \"tsc\"",
-		"dist-back": "pkg --out-dir release build/app.js",
+		"start": "nodemon  src/app.ts",
+		"build": "nodemon -e ts,json --watch \"./src\" -x \"tsc\"",
+		"dist": "pkg --out-dir release build/app.js",
 		"deploy": "powershell ./deploy.ps1"
 	}
 }
