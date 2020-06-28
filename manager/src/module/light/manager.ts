@@ -23,7 +23,6 @@ export class LightManager extends EventEmitter {
         const callback = async () => {
             const release = await mutex.acquire();
             const state = store.getState();
-            // console.log("store NB=", state.lights.lamps.length)
             const news = [];
             for (const lamp of state.lamp.lamps) {
                 if (this.lights.find((l) => l.ip === lamp.ip) === undefined) {

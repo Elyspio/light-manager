@@ -1,13 +1,13 @@
 import {LightData} from "../../../manager/src/module/light/light";
-import {serverURL} from "../config/sockets";
 import store from "../store";
+import {conf} from "../config/conf";
 
 export type LightPreset = "day" | "night";
 
 type LightIdentifier = Pick<LightData, "ip">;
 
 export class LightService {
-    private readonly base = `${serverURL}/light`;
+    private readonly base = `${conf.endpoints.api}/core`;
 
     static _instance: LightService;
 
@@ -80,7 +80,7 @@ export class LightService {
 
     private call = async (url, data?: object, config?: { method?: "GET" | "POST"; ignoreCallLimit?: boolean }) => {
 
-        const method = data ? "GET" : config?.method;
+        const method = data ? config?.method : "GET"
 
         return await fetch(url, {
             method: method,

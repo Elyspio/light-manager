@@ -2,7 +2,8 @@
 	"dev": {
 		"front": {
 			"endpoints": {
-				"api": "http://localhost:4000/lights"
+				"api": "http://localhost:4000",
+				"socket-io": "localhost:4000"
 			}
 		},
 		"manager": {
@@ -12,7 +13,8 @@
 	"prod": {
 		"front": {
 			"endpoints": {
-				"api": "http://elyspio.fr/api/lights"
+				"api": "http://elyspio.fr/api/lights",
+				"socket-io": "elyspio.fr/api/lights"
 			}
 		},
 		"manager": {

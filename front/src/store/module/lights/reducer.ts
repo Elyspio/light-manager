@@ -43,8 +43,11 @@ export const reducer = createReducer<LightState>(
     }
 );
 
-socket.on(socketEvents.updateAll, (lights: LightDataFull[]) => {
-    console.log("UPDATE ALL from server", lights);
+socket.on(socketEvents.updateAll, async (ips: string[]) => {
+    console.log("UPDATE ALL from server", ips);
+
+    const lights = await Promise.all(ips.map(ip => LightService.instance.refresh({ip})))
+
     store.dispatch(addLight(lights));
 });
 

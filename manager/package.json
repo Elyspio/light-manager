@@ -27,7 +27,6 @@
 		"@types/node": "latest",
 		"@types/socket.io": "^2.1.4",
 		"nodemon": "latest",
-		"pkg": "latest",
 		"pm2": "^4.4.0",
 		"source-map-support": "latest",
 		"ts-node": "^8.10.1",
@@ -35,8 +34,6 @@
 	},
 	"scripts": {
 		"start": "nodemon  src/app.ts",
-		"build": "nodemon -e ts,json --watch \"./src\" -x \"tsc\"",
-		"dist": "pkg --out-dir release build/app.js",
-		"deploy": "powershell ./deploy.ps1"
+		"build": "nodemon -e ts,json --watch \"./src\" -x \"tsc\""
 	}
 }

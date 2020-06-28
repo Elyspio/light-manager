@@ -1,5 +1,6 @@
 {
   "endpoints": {
-    "api": "http://elyspio.fr/api/lights"
+    "api": "http://localhost:4000",
+    "socket-io": "localhost:4000"
   }
 }

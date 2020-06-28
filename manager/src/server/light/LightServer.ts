@@ -41,7 +41,7 @@ app.use(
 
 
 const router = Router();
-app.use("/light", router);
+app.use("/core", router);
 initRoutesByLights(router);
 router.all("/switch", async (req: SwitchAllRequest, res) => {
     const light = manager.get();
@@ -60,9 +60,10 @@ router.get("/", async (req, res) => {
 });
 
 manager.on(LightManager.events.updateLights, (lights: Light[]) => {
+    console.log("client ws update",  manager.get().map((l) => l.ip) )
     socketIoServer.sockets.emit(
         socketEvents.updateAll,
-        lights.map((l) => l.json())
+        lights.map((l) => l.ip)
     );
 });
 
@@ -71,8 +72,9 @@ manager.on(LightManager.events.refreshLight, (ip: Ip) => {
 });
 
 socketIoServer.on("connection", (socket) => {
+    console.log("client ws connection",  manager.get().map((l) => l.ip) )
     socket.emit(
         socketEvents.updateAll,
-        manager.get().map((l) => l.json())
+        manager.get().map((l) => l.ip)
     );
 });

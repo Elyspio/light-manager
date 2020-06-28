@@ -1,4 +1,4 @@
 import socketIO from "socket.io-client";
-import {serverURL} from "../config/sockets";
+import {socketServerUrl} from "../config/sockets";
 
-export const socket = socketIO(serverURL);
+export const socket = socketIO(socketServerUrl);

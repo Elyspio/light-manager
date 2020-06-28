@@ -49,4 +49,10 @@ ssh "$sshConnectionString" "cd $( $appLocation )/manager && npm i"
 Write-Host "`n`nOk Deployment finished"
 ### Deployment ###
 
+
+### Rolling back configuration files ###
+Write-Host "`n`n Setting up configs"
+invoke-expression -Command  "$( $PSScriptRoot )/config.ps1  dev"
+### Rolling back configuration files ###
+
 Set-Location $origin

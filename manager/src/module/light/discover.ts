@@ -2,13 +2,15 @@ import {createSocket} from "dgram";
 import {store} from "../../store";
 import {addLights} from "../../store/light/action";
 import {networkInterfaces} from "os";
-import {inetAdress} from "../../config/udp";
 import {discoverRefresh} from "../../config/lights";
+import * as conf from "../../config/conf.json";
 
 const allInterfaces = networkInterfaces();
 const interfaces = Object.keys(allInterfaces)
     .map((key) => allInterfaces[key].map((inter) => inter.address))
     .flat();
+
+const interfaceAddress = allInterfaces[conf["multicast-interface"]].find(inter => inter.family === "IPv4").address
 
 export const discover = () => {
     const udpPort = 1982;
@@ -16,7 +18,7 @@ export const discover = () => {
     const udpServer = createSocket("udp4");
     let address = "239.255.255.250";
     udpServer.bind(udpPort, () => {
-        udpServer.setMulticastInterface(inetAdress);
+        udpServer.setMulticastInterface(interfaceAddress);
         udpServer.addMembership(address);
     });
     udpServer.on("listening", () => {
