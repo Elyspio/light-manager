@@ -2,7 +2,6 @@ import {Socket} from "net";
 import {ColorMode, ColorRgb, LampParam, LampProperty, LampSocket,} from "./types";
 import {Light, LightData} from "./light";
 import {Helper} from "./helper";
-import {error} from "winston";
 import {isDeepStrictEqual} from "util";
 
 export type LightEffect = "sudden" | "smooth";

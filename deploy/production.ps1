@@ -6,7 +6,7 @@ $sshConnectionString = "$( $username )@$( $hostname )"
 ### Conf ###
 
 ### Set configuration files ###
-Write-Host "`n`n Setting up configs"
+Write-Host "`n`nSetting up configs"
 invoke-expression -Command  "$( $PSScriptRoot )/config.ps1  prod"
 ### Set configuration files ###
 
@@ -37,11 +37,11 @@ Write-Host "`tDone"
 
 
 Write-Host "`nUploading front's files"  -NoNewline
-bash.exe -c "rsync -av -e ssh  front/build $( $sshConnectionString ):$( $appLocation )/front"
+bash.exe -c "rsync -av -e ssh  front/build/* $( $sshConnectionString ):$( $appLocation )/front"
 Write-Host "`tDone"
 
 Write-Host "`nUploading manager's files"  -NoNewline
-bash.exe -c  "rsync -av -e ssh  manager/build manager/package.json $( $sshConnectionString ):$( $appLocation )/manager"
+bash.exe -c  "rsync -av -e ssh  manager/build/* manager/package.json $( $sshConnectionString ):$( $appLocation )/manager"
 Write-Host "`tDone"
 
 Write-Host "`n`nInstalling modules in $( $appLocation )/manager" -NoNewline
@@ -51,7 +51,7 @@ Write-Host "`n`nOk Deployment finished"
 
 
 ### Rolling back configuration files ###
-Write-Host "`n`n Setting up configs"
+Write-Host "`n`n Rolling back configs"
 invoke-expression -Command  "$( $PSScriptRoot )/config.ps1  dev"
 ### Rolling back configuration files ###
 
