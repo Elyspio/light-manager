@@ -4,9 +4,7 @@ import {SwitchAllRequest} from "./requests";
 import {Responses} from "./responses";
 import {initRoutesByLights} from "./SpecificLightRouter";
 import {json, urlencoded} from "body-parser";
-import expressWinston from "express-winston";
-import winston from "winston";
-import {logFolder} from "../../util/logger";
+import {logger, loggerConfig} from "../../util/logger";
 import {Light} from "../../module/light/light";
 import {socketEvents} from "../../config/socket";
 import {Ip} from "../../module/light/types";
@@ -26,19 +24,15 @@ app.use(urlencoded({extended: true}));
 app.use(json());
 app.use(cors());
 
-app.use(
-    expressWinston.logger({
-        transports: [
-            // new winston.transports.Console(),
-            new winston.transports.File({
-                dirname: logFolder,
-                filename: "express.log",
-            }),
-        ],
-        format: winston.format.combine(winston.format.json()),
+app.use((req, res, next) => {
+    logger?.log("request", `Got a request`, {
+        method: req.method,
+        url: req.originalUrl,
+        from: req.hostname,
+        data: req.method === "get" ? req.params : req.body
     })
-);
-
+    next();
+})
 
 const router = Router();
 app.use("/core", router);
@@ -60,7 +54,7 @@ router.get("/", async (req, res) => {
 });
 
 manager.on(LightManager.events.updateLights, (lights: Light[]) => {
-    console.log("client ws update", manager.get().map((l) => l.ip))
+    logger.log("client ws update", manager.get().map((l) => l.ip))
     socketIoServer.sockets.emit(
         socketEvents.updateAll,
         lights.map((l) => l.ip)
@@ -72,7 +66,7 @@ manager.on(LightManager.events.refreshLight, (ip: Ip) => {
 });
 
 socketIoServer.on("connection", (socket) => {
-    console.log("client ws connection", manager.get().map((l) => l.ip))
+    logger.log("client ws connection", manager.get().map((l) => l.ip))
     socket.emit(
         socketEvents.updateAll,
         manager.get().map((l) => l.ip)

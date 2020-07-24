@@ -4,6 +4,7 @@ import {addLights} from "../../store/light/action";
 import {networkInterfaces} from "os";
 import {discoverRefresh} from "../../config/lights";
 import * as conf from "../../config/conf.json";
+import {logger} from "../../util/logger";
 
 const allInterfaces = networkInterfaces();
 const interfaces = Object.keys(allInterfaces)
@@ -23,7 +24,7 @@ export const discover = () => {
     });
     udpServer.on("listening", () => {
         const address = udpServer.address();
-        console.log("UDP Client listening on ", address);
+        logger.info("UDP Client listening on ", address);
     });
 
     udpServer.on("message", (msg, rinfo) => {

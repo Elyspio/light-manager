@@ -3,8 +3,19 @@ import {ColorMode, ColorRgb, LampParam, LampProperty, LampSocket,} from "./types
 import {Light, LightData} from "./light";
 import {Helper} from "./helper";
 import {isDeepStrictEqual} from "util";
+import {logger} from "../../util/logger";
 
 export type LightEffect = "sudden" | "smooth";
+
+
+namespace Methods {
+    export type interact = (
+        data: Pick<LampParam, "params" | "method">,
+        config?: { timeout: number }
+    ) => Promise<LampSocket.all>
+}
+
+
 
 export class LightService {
     private static requestId = 0;
@@ -58,7 +69,7 @@ export class LightService {
                 errors.forEach(handleError)
 
             } catch (e) {
-                console.error("error in tcp recieve data", raw.toString(), e)
+                logger.error("error in tcp recieve data", raw.toString(), e)
             }
 
         });
@@ -268,10 +279,8 @@ export class LightService {
         return LightService.convertProps(await this.getProps());
     }
 
-    private async interact(
-        data: Pick<LampParam, "params" | "method">,
-        config?: { timeout: number }
-    ): Promise<LampSocket.all> {
+
+    private interact: Methods.interact = async (data, config) => {
         return new Promise((resolve, reject) => {
             const callback = (data: LampSocket.all) => {
                 if (data.error) {

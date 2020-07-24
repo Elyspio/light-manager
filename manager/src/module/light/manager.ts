@@ -4,6 +4,7 @@ import {LampData} from "../../store/light/reducer";
 import {EventEmitter} from "events";
 import {Mutex} from "async-mutex";
 import {refreshRate} from "../../config/lights";
+import {logger} from "../../util/logger";
 
 const mutex = new Mutex();
 
@@ -27,7 +28,7 @@ export class LightManager extends EventEmitter {
             for (const lamp of state.lamp.lamps) {
                 if (this.lights.find((l) => l.ip === lamp.ip) === undefined) {
                     news.push(lamp);
-                    console.log(`${lamp.ip} is a new lamp`);
+                    logger.info(`${lamp.ip} is a new lamp`);
                 }
             }
             await self.addLight(news);
@@ -36,7 +37,7 @@ export class LightManager extends EventEmitter {
 
         store.subscribe(callback);
         setTimeout(() => {
-            console.log("timeout");
+            logger.info("timeout");
             setInterval(() => {
                 self.refresh();
             }, refreshRate);
@@ -87,14 +88,14 @@ export class LightManager extends EventEmitter {
                 this.lights.push(
                     await Light.get(datum.id.toString(), datum.ip, datum.port)
                 );
-                console.log("added", datum);
+                logger.info("added", datum);
                 refresh = true;
             }
         }
 
         if (refresh) {
             this.emit(LightManager.events.updateLights, this.lights);
-            console.log("EMIUT");
+            logger.info("EMIUT");
         }
     }
 }

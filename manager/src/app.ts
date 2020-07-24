@@ -1,6 +1,7 @@
 import {discover} from "./module/light/discover";
 import {ArgumentParser} from "argparse"
 import servers from "./server";
+import {logger} from "./util/logger";
 
 const parser = new ArgumentParser();
 parser.addArgument("--backend-port", {dest: "backendPort", defaultValue: 4000, type: "int"})
@@ -12,7 +13,7 @@ if(process.env.MANAGER_PORT) {
 
 
 servers.light.listen(args.backendPort, () => {
-    console.log("Listening backend on port ", args.backendPort)
+    logger.log("Listening backend on port ", args.backendPort)
 });
 
 
