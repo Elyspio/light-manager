@@ -1,4 +1,7 @@
-﻿*.d.ts
+*/node_modules
+*/build
+*.map
+logs
 *.js
-*.js.map
-front/maquettes
+*.d.ts
+front/.bitmap

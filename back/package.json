@@ -1,0 +1,38 @@
+{
+	"name": "back",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "nodemon src/app.ts",
+		"build": "tsc",
+		"docker": "wsl ../docker/docker.sh"
+	},
+	"dependencies": {
+		"@tsed/common": "^6.22.2",
+		"@tsed/core": "^6.22.2",
+		"@tsed/di": "^6.22.2",
+		"@tsed/platform-express": "^6.22.2",
+		"@tsed/schema": "^6.22.2",
+		"@tsed/socketio": "^6.22.2",
+		"@tsed/swagger": "^6.22.2",
+		"axios": "^0.21.1",
+		"body-parser": "^1.19.0",
+		"compression": "^1.7.4",
+		"cookie-parser": "^1.4.5",
+		"cors": "^2.8.5",
+		"method-override": "^3.0.0",
+		"socket.io": "^3.1.0",
+		"tslib": "^2.1.0"
+	},
+	"devDependencies": {
+		"@types/body-parser": "^1.19.0",
+		"@types/compression": "^1.7.0",
+		"@types/cookie-parser": "^1.4.2",
+		"@types/cors": "^2.8.9",
+		"@types/method-override": "^0.0.31",
+		"@types/node": "^14.14.20",
+		"nodemon": "latest",
+		"ts-node": "latest",
+		"typescript": "latest"
+	}
+}

@@ -1,0 +1,26 @@
+FROM node:12-alpine
+
+# Create app directory
+WORKDIR /app
+
+# Front
+RUN mkdir -p /app/front
+COPY front/build ./front/build
+
+# Server
+RUN mkdir -p /app/back
+COPY back/build ./back
+COPY back/package.json ./back/package.json
+RUN cd back && npm i --only=production
+
+
+# Setting environment variables
+ENV LOG_FOLDER /app/logs
+ENV NODE_ENV production
+
+EXPOSE 4000
+
+WORKDIR /app/back
+
+CMD ["node", "app.js"]
+

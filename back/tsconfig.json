@@ -1,0 +1,35 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "./build",
+		"target": "ES2020",
+		"lib": [
+			"es2016",
+			"dom",
+			"ES2020",
+			"ESNext"
+		],
+		"typeRoots": [
+			"./node_modules/@types"
+		],
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"noImplicitAny": false,
+		"resolveJsonModule": true,
+		"sourceMap": false,
+		"declaration": false,
+		"strict": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"include": [
+		"./src/**/*.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"./public",
+		"dist",
+		"test"
+	]
+}

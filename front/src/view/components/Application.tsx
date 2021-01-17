@@ -1,0 +1,67 @@
+import * as React from 'react';
+import {Paper} from "@material-ui/core";
+import "./Application.scss"
+import {connect, ConnectedProps} from "react-redux";
+import {Dispatch} from "redux";
+import {RootState} from "../store/reducer";
+import {toggleTheme} from "../store/module/theme/action";
+import Brightness5Icon from '@material-ui/icons/Brightness5';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
+import {Common} from "./lights/common/Common";
+import Manager from "./lights/manager/Manager";
+import {Action, Drawer} from "./utils/drawer/Drawer";
+import Detail from "./lights/light/Detail";
+import Appbar from "./appbar/Appbar";
+
+const mapStateToProps = (state: RootState) => ({theme: state.theme.current, isLightSelected: !!state.light.current})
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({toggleTheme: () => dispatch(toggleTheme())})
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type ReduxTypes = ConnectedProps<typeof connector>;
+
+export interface Props {
+}
+
+interface State {
+    something: object
+}
+
+class Application extends React.Component<Props & ReduxTypes, State> {
+
+
+    async componentDidMount() {
+
+    }
+
+    render() {
+        const actions: Action[] = [{
+            icon: this.props.theme === "dark" ? <Brightness5Icon/> : <Brightness3Icon/>,
+            text: "Toggle Theme",
+            onClick: this.props.toggleTheme
+        }]
+        return (
+            <Paper square={true} className={"Application"}>
+                <Drawer position={"right"} actions={actions}>
+                    <div className="content">
+                        <Appbar appName={"Light Manager"}/>
+                        <Paper square className={"inner"}>
+                            <div className={"left"}>
+                                <Manager/>
+                                <Common/>
+                            </div>
+                            <div className="right">
+                                {this.props.isLightSelected && <Detail/>}
+                            </div>
+                        </Paper>
+                    </div>
+
+
+                </Drawer>
+
+            </Paper>
+        );
+    }
+}
+
+export default connector(Application)

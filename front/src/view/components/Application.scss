@@ -1,0 +1,45 @@
+.Application {
+
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	height: 100vh;
+	overflow-x: hidden;
+
+
+	.content {
+		height: 100%;
+		width: 100%;
+
+		.inner {
+
+			display: flex;
+
+			.left {
+				margin-top: 1rem;
+				width: 30vw;
+
+				.Manager {
+					margin-bottom: 2rem;
+				}
+			}
+
+			.right {
+				margin-top: 1rem;
+				width: 100%;
+				margin-left: 3rem;
+			}
+		}
+
+	}
+
+
+	.Drawer {
+		height: 100%;
+	}
+
+
+}
+
+

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ae199c35-aa8a-482c-a0a5-c7773df6103a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/light-manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/light-manager.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/build_back.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/start_back.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/start_front.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/startup.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy/config.ps1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy/envs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy/production.ps1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/front/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/front/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/Application.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/Application.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/common/Drawer.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/common/Drawer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/Board.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/Board.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/common/Common.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/light/Action.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/light/Detail.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/light/Detail.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/manager/Light.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/manager/Light.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/manager/Manager.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/lights/manager/Manager.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/config/conf.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/config/sockets.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/config/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/config/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/model/LightService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/model/socket.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/serviceWorker.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/setupTests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/store/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/store/module/lights/action.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/store/module/lights/reducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/store/module/theme/action.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/store/module/theme/reducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/store/reducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/front/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/app.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/config/conf.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/config/lights.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/config/socket.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/module/light/discover.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/module/light/helper.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/module/light/light.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/module/light/manager.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/module/light/service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/module/light/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/server/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/server/light/LightServer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/server/light/SpecificLightRouter.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/server/light/requests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/server/light/responses.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/store/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/store/light/action.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/store/light/reducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/store/reducers.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/util/logger.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/yarn.lock" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1nA2NixJD6mDuBj0ZBjABqz357U" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JavaScript" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.3" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.21" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/front/src/config" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="ts.external.directory.path" value="P:\own\desktop\cross-platform\light-manager\back\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="P:\own\desktop\cross-platform\light-manager\front\src\config" />
+      <recent name="P:\own\desktop\cross-platform\light-manager\front\src\core\services" />
+      <recent name="P:\own\desktop\cross-platform\light-manager\front\src\view\components" />
+      <recent name="P:\own\desktop\cross-platform\light-manager\front\src\view\store\module" />
+      <recent name="P:\own\desktop\cross-platform\light-manager\manager\src\config" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="P:\own\desktop\cross-platform\light-manager\front\src\core\apis" />
+      <recent name="P:\own\desktop\cross-platform\light-manager\front" />
+      <recent name="P:\own\desktop\cross-platform\light-manager\back\src\config\light" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Front">
+    <configuration name="scratch.js" type="NodeJSConfigurationType" temporary="true" path-to-node="node" nameIsGenerated="true" path-to-js-file="$APPLICATION_CONFIG_DIR$/scratches/scratch.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="Back" type="js.build_tools.npm" temporary="true">
+      <package-json value="$PROJECT_DIR$/back/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Front" type="js.build_tools.npm" temporary="true">
+      <package-json value="$PROJECT_DIR$/front/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/manager/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.scratch.js" />
+      <item itemvalue="npm.Back" />
+      <item itemvalue="npm.start (1)" />
+      <item itemvalue="npm.Front" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.Front" />
+        <item itemvalue="npm.Back" />
+        <item itemvalue="npm.start (1)" />
+        <item itemvalue="Node.js.scratch.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ae199c35-aa8a-482c-a0a5-c7773df6103a" name="Default Changelist" comment="" />
+      <created>1610818540791</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610818540791</updated>
+      <workItem from="1610818542103" duration="7005000" />
+      <workItem from="1610825598152" duration="3074000" />
+      <workItem from="1610828709677" duration="1755000" />
+      <workItem from="1610888655546" duration="12326000" />
+      <workItem from="1610905124788" duration="3136000" />
+      <workItem from="1610909931272" duration="5075000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/front_/src/store/module/theme/action.js.map" />
+        <option value="$PROJECT_DIR$/front_/src/model/socket.d.ts" />
+        <option value="$PROJECT_DIR$/front_/src/model/LightService.d.ts" />
+        <option value="$PROJECT_DIR$/front_/src/store/module/theme/reducer.js.map" />
+        <option value="$PROJECT_DIR$/front_/src/store/module/lights/action.js.map" />
+        <option value="$PROJECT_DIR$/front_/src/store/module/lights/reducer.js.map" />
+        <option value="$PROJECT_DIR$/front_/src/config/sockets.d.ts" />
+        <option value="$PROJECT_DIR$/front/src/view/store/module/lights/action.js.map" />
+        <option value="$PROJECT_DIR$/front/src/view/store/module/lights/reducer.js.map" />
+        <option value="$PROJECT_DIR$/front/src/core/services/light/socket.d.ts" />
+        <option value="$PROJECT_DIR$/front/src/core/services/light/LightService.d.ts" />
+        <option value="$PROJECT_DIR$/front/src/config/light/sockets.d.ts" />
+      </list>
+    </option>
+  </component>
+</project>

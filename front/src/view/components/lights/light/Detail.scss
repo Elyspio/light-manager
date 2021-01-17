@@ -1,0 +1,41 @@
+.Detail {
+	padding: 1rem;
+
+	> .Board:first-child {
+		margin-bottom: 1rem;
+	}
+
+	.body {
+
+		width: 100%;
+		margin-right: 2rem;
+		margin-left: 2rem;
+
+
+		> * {
+			display: flex;
+
+			p {
+				min-width: 10rem;
+				min-height: 2rem;
+				line-height: 2rem;
+			}
+		}
+
+		.luminosity {
+			margin-top: 2rem;
+			width: 100%;
+
+		}
+
+
+	}
+
+	.btns {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+	}
+
+
+}
