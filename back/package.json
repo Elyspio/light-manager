@@ -5,7 +5,9 @@
 	"scripts": {
 		"start": "nodemon src/app.ts",
 		"build": "tsc",
-		"docker": "wsl ../docker/docker.sh"
+		"docker": "run-script-os",
+		"docker:linux": "wsl ../docker/docker.sh",
+		"docker:win32": "powershell ../docker/docker.ps1"
 	},
 	"dependencies": {
 		"@tsed/common": "^6.22.2",
@@ -33,6 +35,8 @@
 		"@types/node": "^14.14.20",
 		"nodemon": "latest",
 		"ts-node": "latest",
-		"typescript": "latest"
+		"typescript": "latest",
+		"@types/socket.io": "^2.1.12",
+		"run-script-os": "^1.1.5"
 	}
 }

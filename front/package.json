@@ -8,8 +8,7 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"docker": "cd ../back && yarn docker",
-		"push": "cd ../back && yarn push"
+		"docker": "cd ../back && yarn docker"
 	},
 	"dependencies": {
 		"@material-ui/core": "4.11.2",

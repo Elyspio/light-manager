@@ -45,19 +45,6 @@ class Detail extends React.Component<Props, State> {
     render() {
         let {current: data} = this.props;
 
-        console.log("render", data);
-
-        const colors: ThemeColor = {
-            dark: {
-                fg: "#FFF",
-                bg: "#005683"
-            },
-            light: {
-                fg: "#fff",
-                bg: "#62727b"
-            }
-        }
-
         let marks = [{label: "1%", value: 1}, {label: "100%", value: 100}];
         return (
             <Board className={"Detail"} title={`Lampe : ${data.name}`}>

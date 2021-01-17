@@ -1,0 +1,6 @@
+services:
+  app:
+    image: elyspio/light-manager
+    volumes:
+      - ./logs:/app/logs
+    environment:

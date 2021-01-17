@@ -1,16 +1,16 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
 # Create app directory
 WORKDIR /app
 
 # Front
 RUN mkdir -p /app/front
-COPY front/build ./front/build
+COPY front/build /app/front/build
 
 # Server
 RUN mkdir -p /app/back
-COPY back/build ./back
-COPY back/package.json ./back/package.json
+COPY back/build /app/back
+COPY back/package.json /app/back/package.json
 RUN cd back && npm i --only=production
 
 
