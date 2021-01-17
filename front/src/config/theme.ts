@@ -1,37 +1,31 @@
 import {createMuiTheme, Theme} from "@material-ui/core";
-import * as colors from "@material-ui/core/colors";
 
 const darkTheme = createMuiTheme({
     palette: {
-        type: "dark",
-        secondary: {
-            ...colors.grey,
-            main: colors.grey["500"],
-
-        },
+        type: 'dark',
         primary: {
-            ...colors.blue,
-            main: colors.blue["400"],
+            main: '#00d65a',
+        },
+        secondary: {
+            main: '#42a5f5',
         },
         background: {
-            paper: "#1d1d1d",
-            default: "#0e0e0e",
+            default: "rgb(36 36 36)",
+            paper: "rgb(36 36 36)"
         }
-
     },
 });
 
 const lightTheme = createMuiTheme({
     palette: {
-        type: "light",
-        secondary: {
-            ...colors.grey,
-            main: colors.grey["900"],
-        },
+        type: 'light',
         primary: {
-            ...colors.blue,
-            main: colors.blue["400"],
+            main: '#000',
         },
+        secondary: {
+            main: '#42a5f5',
+        },
+        background: {}
     },
 });
 

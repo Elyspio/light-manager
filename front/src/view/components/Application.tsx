@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Paper} from "@material-ui/core";
+import {Box, Paper} from "@material-ui/core";
 import "./Application.scss"
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
@@ -11,7 +11,6 @@ import {Common} from "./lights/common/Common";
 import Manager from "./lights/manager/Manager";
 import {Action, Drawer} from "./utils/drawer/Drawer";
 import Detail from "./lights/light/Detail";
-import Appbar from "./appbar/Appbar";
 
 const mapStateToProps = (state: RootState) => ({theme: state.theme.current, isLightSelected: !!state.light.current})
 
@@ -41,11 +40,10 @@ class Application extends React.Component<Props & ReduxTypes, State> {
             onClick: this.props.toggleTheme
         }]
         return (
-            <Paper square={true} className={"Application"}>
+            <Paper square className={"Application"}>
                 <Drawer position={"right"} actions={actions}>
                     <div className="content">
-                        <Appbar appName={"Light Manager"}/>
-                        <Paper square className={"inner"}>
+                        <Box className={"inner"}>
                             <div className={"left"}>
                                 <Manager/>
                                 <Common/>
@@ -53,7 +51,7 @@ class Application extends React.Component<Props & ReduxTypes, State> {
                             <div className="right">
                                 {this.props.isLightSelected && <Detail/>}
                             </div>
-                        </Paper>
+                        </Box>
                     </div>
 
 

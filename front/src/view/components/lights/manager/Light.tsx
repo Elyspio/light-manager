@@ -41,8 +41,7 @@ class Light extends Component<Props> {
                 <IconButton disabled={!available}
                             onClick={this.onPowerClick}
                             className={"btn-power"}>
-                    <PowerSettingsNewIcon
-                        style={data.powered ? {color: "orange"} : {}}/>
+                    <PowerSettingsNewIcon color={data.powered ? "primary" : undefined}/>
                 </IconButton>
             </Box>
         );

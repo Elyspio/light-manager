@@ -61,26 +61,26 @@ class Detail extends React.Component<Props, State> {
         let marks = [{label: "1%", value: 1}, {label: "100%", value: 100}];
         return (
             <Board className={"Detail"} title={`Lampe : ${data.name}`}>
-                <Board title={"Couleurs"} color={colors}
+                <Board title={"Couleurs"}
                        border={false}
-                       expansionable>
+                       expansible>
                     <Typography>Disabled Expansion Panel</Typography>
                 </Board>
 
-                <Board title={"Informations"} color={colors}
+                <Board title={"Informations"}
                        expanded
                        border={false}
-                       expansionable>
+                       expansible>
                     <Box className={"state"}>
                         <Typography>Etats</Typography>
                         <Box className="btns">
-                            <Button onClick={() => this.setLightState(true)} variant={"outlined"}>
+                            <Button onClick={() => this.setLightState(true)} variant={"outlined"} disabled={data.powered}>
                                 Allumer
                             </Button>
                             <Button onClick={() => this.powerOnly()} variant={"outlined"}>
                                 Eteindre les autres
                             </Button>
-                            <Button onClick={() => this.setLightState(false)} variant={"outlined"}>
+                            <Button onClick={() => this.setLightState(false)} variant={"outlined"} disabled={!data.powered}>
                                 Eteindre
                             </Button>
                         </Box>

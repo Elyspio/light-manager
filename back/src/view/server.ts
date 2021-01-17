@@ -3,7 +3,7 @@ import {PlatformApplication} from "@tsed/common";
 import {middlewares} from "./middleware/common/raw";
 import * as path from "path";
 import "@tsed/swagger";
-import   "@tsed/socketio";
+import "@tsed/socketio";
 
 export const rootDir = __dirname;
 let frontPath = path.resolve(rootDir, "..", "..", "front", "build");

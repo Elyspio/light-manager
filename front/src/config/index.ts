@@ -1,5 +1,5 @@
-import {Services} from "../core/services";
 import store from "../view/store";
+
 export const endpoints: ReturnType<typeof createEndpoints> = createEndpoints();
 
 function getEnv(name: string, fallback?: string): string {

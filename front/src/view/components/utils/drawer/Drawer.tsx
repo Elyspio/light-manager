@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         main: {
             width: `calc(100% - ${baseWidth}px)`,
-            height: "100%",
             transition: theme.transitions.create('width', {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,

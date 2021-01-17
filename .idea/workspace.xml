@@ -2,83 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae199c35-aa8a-482c-a0a5-c7773df6103a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/light-manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/light-manager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/build_back.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/start_back.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/start_front.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/startup.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deploy/config.ps1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deploy/envs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deploy/production.ps1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/front/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/front/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/Application.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/Application.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/common/Drawer.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/common/Drawer.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/Board.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/Board.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/common/Common.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/light/Action.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/light/Detail.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/light/Detail.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/manager/Light.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/manager/Light.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/manager/Manager.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/lights/manager/Manager.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/config/conf.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/config/sockets.ts" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/view/components/lights/common/Common.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/front/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/config/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/config/theme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/model/LightService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/model/socket.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/serviceWorker.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/setupTests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/store/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/store/module/lights/action.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/store/module/lights/reducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/store/module/theme/action.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/store/module/theme/reducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/store/reducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/Application.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/Application.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/Application.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/Application.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/Board.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/Board.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/common/Common.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/common/Common.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/light/Detail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/light/Detail.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/light/Detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/light/Detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/manager/Light.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/manager/Light.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/utils/drawer/Drawer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/utils/drawer/Drawer.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/front/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/app.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/config/conf.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/config/lights.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/config/socket.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/module/light/discover.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/module/light/helper.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/module/light/light.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/module/light/manager.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/module/light/service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/module/light/types.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/server/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/server/light/LightServer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/server/light/SpecificLightRouter.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/server/light/requests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/server/light/responses.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/store/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/store/light/action.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/store/light/reducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/store/reducers.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/util/logger.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +137,7 @@
       <workItem from="1610828709677" duration="1755000" />
       <workItem from="1610888655546" duration="12326000" />
       <workItem from="1610905124788" duration="3136000" />
-      <workItem from="1610909931272" duration="5075000" />
+      <workItem from="1610909931272" duration="8787000" />
     </task>
     <servers />
   </component>
@@ -209,18 +145,8 @@
     <option name="version" value="3" />
     <option name="exactExcludedFiles">
       <list>
-        <option value="$PROJECT_DIR$/front_/src/store/module/theme/action.js.map" />
-        <option value="$PROJECT_DIR$/front_/src/model/socket.d.ts" />
-        <option value="$PROJECT_DIR$/front_/src/model/LightService.d.ts" />
-        <option value="$PROJECT_DIR$/front_/src/store/module/theme/reducer.js.map" />
-        <option value="$PROJECT_DIR$/front_/src/store/module/lights/action.js.map" />
-        <option value="$PROJECT_DIR$/front_/src/store/module/lights/reducer.js.map" />
-        <option value="$PROJECT_DIR$/front_/src/config/sockets.d.ts" />
-        <option value="$PROJECT_DIR$/front/src/view/store/module/lights/action.js.map" />
-        <option value="$PROJECT_DIR$/front/src/view/store/module/lights/reducer.js.map" />
         <option value="$PROJECT_DIR$/front/src/core/services/light/socket.d.ts" />
         <option value="$PROJECT_DIR$/front/src/core/services/light/LightService.d.ts" />
-        <option value="$PROJECT_DIR$/front/src/config/light/sockets.d.ts" />
       </list>
     </option>
   </component>

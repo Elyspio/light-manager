@@ -1,11 +1,11 @@
 import {ActionReducerMapBuilder, createReducer} from "@reduxjs/toolkit";
-import {addLight, updateLight, setForDetail} from "./action";
+import {addLight, setForDetail, updateLight} from "./action";
 import store from "../../index";
 import {createSocket} from "../../../../core/services/light/socket";
 import {Services} from "../../../../core/services";
 import {Ip} from "../../../../../../back/src/core/services/light/types";
 import {socketEvents} from "../../../../config/light/sockets";
-import { Socket} from "socket.io-client";
+import {Socket} from "socket.io-client";
 import {LightDataModel} from "../../../../core/apis/back/models";
 
 export interface LightState {

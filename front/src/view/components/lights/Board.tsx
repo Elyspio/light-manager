@@ -1,17 +1,5 @@
 import React, {CSSProperties, ReactNode} from "react";
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    AppBar,
-    Box,
-    ExpansionPanel,
-    ExpansionPanelDetails,
-    ExpansionPanelSummary,
-    Paper,
-    Toolbar,
-    Typography
-} from "@material-ui/core";
+import {Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Paper, Toolbar, Typography} from "@material-ui/core";
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
 import {RootState} from "../../store/reducer";
@@ -23,7 +11,7 @@ interface Props {
     size?: "small",
     color?: ThemeColor,
     children?: ReactNode,
-    expansionable?: boolean,
+    expansible?: boolean,
     elevation?: number;
     border?: boolean,
     expanded?: boolean
@@ -50,7 +38,7 @@ type ReduxTypes = ConnectedProps<typeof connector>;
 class BoardComponent extends React.Component<Props & ReduxTypes> {
     render() {
 
-        const {color, title, theme, className, children, size, expansionable, elevation, border, expanded} = this.props;
+        const {color, title, theme, className, children, size, expansible, elevation, border, expanded} = this.props;
 
         const style: CSSProperties = {};
         if (color) {
@@ -65,7 +53,7 @@ class BoardComponent extends React.Component<Props & ReduxTypes> {
         }
 
         const classname = ["Board", size === "small" ? "small" : "", border === false ? "no-border" : ""]
-        const header = <AppBar position={"static"} style={style}>
+        const header = <AppBar position={"static"} color={"default"}>
             <Toolbar>
                 <Typography className={"header"}>
                     {title}
@@ -79,7 +67,7 @@ class BoardComponent extends React.Component<Props & ReduxTypes> {
         </div>
 
 
-        const total = expansionable
+        const total = expansible
             ? <Accordion defaultExpanded={expanded}>
                 <AccordionSummary>
                     {header}
