@@ -48,6 +48,9 @@ export const reducer = createReducer<LightState>(
 
 
 export const listenSocket = (socket: typeof Socket = createSocket()) => {
+
+    console.log("creating socket.io client", socket);
+
     socket.on(socketEvents.updateAll, async (ips: string[]) => {
         console.log("UPDATE ALL from server", ips);
 

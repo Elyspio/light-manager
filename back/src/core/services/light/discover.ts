@@ -2,7 +2,7 @@ import {createSocket} from "dgram";
 import {networkInterfaces} from "os";
 
 import {$log} from "@tsed/common";
-import * as conf from "../../../config/light/conf.json"
+import conf from "../../../config/light/conf"
 import {discoverRefresh} from "../../../config/light/lights";
 import {Services} from "../index";
 
@@ -15,7 +15,8 @@ const addresses = Object.keys(allInterfaces)
 const interfaceAddress = allInterfaces[conf["multicast-interface"]]?.find(inter => inter.family === "IPv4")?.address
 
 if (!interfaceAddress) {
-    throw `Could not find an IPV4 address for interface ${conf[`multicast-interface`]}`
+    console.error(conf,  JSON.stringify( allInterfaces))
+    throw `Could not find an IPV4 address for interface '${conf[`multicast-interface`]}', available: [${Object.keys(allInterfaces).join(", ")}]`
 }
 
 

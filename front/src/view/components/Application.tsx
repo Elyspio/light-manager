@@ -11,6 +11,8 @@ import {Common} from "./lights/common/Common";
 import Manager from "./lights/manager/Manager";
 import {Action, Drawer} from "./utils/drawer/Drawer";
 import Detail from "./lights/light/Detail";
+import {Apis} from "../../core/apis";
+import {Services} from "../../core/services";
 
 const mapStateToProps = (state: RootState) => ({theme: state.theme.current, isLightSelected: !!state.light.current})
 
@@ -30,7 +32,7 @@ class Application extends React.Component<Props & ReduxTypes, State> {
 
 
     async componentDidMount() {
-
+       await Services.api.refresh();
     }
 
     render() {

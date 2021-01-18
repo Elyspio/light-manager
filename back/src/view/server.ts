@@ -4,13 +4,14 @@ import {middlewares} from "./middleware/common/raw";
 import * as path from "path";
 import "@tsed/swagger";
 import "@tsed/socketio";
+import {env} from "process"
 
 export const rootDir = __dirname;
 let frontPath = path.resolve(rootDir, "..", "..", "front", "build");
 
 @Configuration({
     rootDir,
-    httpPort: process.env.HTTP_PORT || 4000,
+    httpPort: env.BACKEND_PORT || 4000,
     httpsPort: false, // CHANGE
     componentsScan: [`${rootDir}/controller/**/*.ts`],
     mount: {
@@ -31,8 +32,7 @@ let frontPath = path.resolve(rootDir, "..", "..", "front", "build");
     }],
     // @ts-ignore
     socketIO: {
-        cors: {origin: ["http://localhost:3000"]},
-
+        cors: {origin: [env.BACKEND_HOST ?? "http://localhost:3000"]},
     }
 })
 export class Server {

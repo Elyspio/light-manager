@@ -1,10 +1,10 @@
 import {EnvironmentsApi, LightControllerApi} from "./back"
-import {createEndpoints} from "../../config";
+import {getEndpoint} from "../../view/store/module/config/reducer";
 
 type Apis = {
     core: {
         light: LightControllerApi,
-        environments: EnvironmentsApi
+        config: EnvironmentsApi
     }
 }
 
@@ -13,12 +13,12 @@ export var Apis: Apis = createApis();
 
 export function createApis(): Apis {
 
-    const endpoints = createEndpoints();
+    const core = getEndpoint("core");
 
     Apis = {
         core: {
-            light: new LightControllerApi({basePath: endpoints.core.api}),
-            environments: new EnvironmentsApi({basePath: endpoints.core.api})
+            light: new LightControllerApi({basePath: core.api}),
+            config: new EnvironmentsApi({basePath: core.api})
         },
     }
     return Apis;
