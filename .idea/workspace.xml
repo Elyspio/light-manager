@@ -2,31 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae199c35-aa8a-482c-a0a5-c7773df6103a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front/public/conf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/config/global.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/config/global.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/config/light/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/config/light/conf.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/core/services/light/discover.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/core/services/light/discover.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/view/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/view/server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker/.env" beforeDir="false" afterPath="$PROJECT_DIR$/docker/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/app/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/docker/app/conf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker/docker.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker.ps1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/front/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/front/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/config/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/config/light/sockets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/config/light/sockets.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/services/Api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/services/Api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/services/Environments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/services/Config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/services/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/services/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/conf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/core/services/light/socket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/services/light/socket.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/components/Application.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/Application.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/store/module/environments/action.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/module/config/action.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/store/module/environments/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/module/config/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/store/module/lights/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/module/lights/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/store/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/store/module/config/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/module/config/reducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,8 +120,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.docker" />
-        <item itemvalue="npm.Front" />
         <item itemvalue="npm.Back" />
+        <item itemvalue="npm.Front" />
         <item itemvalue="Docker.docker: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -157,6 +142,8 @@
       <workItem from="1610909931272" duration="12221000" />
       <workItem from="1611001028307" duration="995000" />
       <workItem from="1611002098907" duration="8171000" />
+      <workItem from="1611171454050" duration="171000" />
+      <workItem from="1611171648990" duration="6968000" />
     </task>
     <servers />
   </component>
@@ -164,7 +151,6 @@
     <option name="version" value="3" />
     <option name="exactExcludedFiles">
       <list>
-        <option value="$PROJECT_DIR$/front/src/core/services/light/socket.d.ts" />
         <option value="$PROJECT_DIR$/front/src/core/services/light/LightService.d.ts" />
       </list>
     </option>

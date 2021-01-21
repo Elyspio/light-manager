@@ -2,7 +2,7 @@
 	"name": "front",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "/",
+	"homepage": "/light-manager/",
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",

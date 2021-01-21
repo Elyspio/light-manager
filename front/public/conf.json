@@ -1,5 +1,11 @@
 {
 	"endpoints": {
-		"back": "http://192.168.0.44:4000"
+		"core": {
+			"api": "http://192.168.0.50:4000",
+			"socket": {
+				"port": "4000",
+				"path": "/socket.io/lights"
+			}
+		}
 	}
 }

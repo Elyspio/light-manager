@@ -12,3 +12,4 @@ services:
       BACKEND_SOCKET_HOST: http://${HOST}:${PUBLIC_PORT}/socket.io/lights
       BACKEND_PORT: ${PRIVATE_PORT}
       NETWORK_INTERFACE: eth0
+    network_mode: "host"

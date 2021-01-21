@@ -3,9 +3,9 @@ import {setEndpoints, setEnvironment} from "./action";
 import store from "../../index";
 
 const xhr = new XMLHttpRequest()
-xhr.open("GET", "/conf.json", false)
+xhr.open("GET", "/light-manager/"  +   "/conf.json", false)
 xhr.send()
-const initConf = JSON.parse(xhr.responseText)
+const initConf: ConfigState = JSON.parse(xhr.responseText)
 
 export function getEnv(name: keyof ConfigState["envs"]): string {
     return store?.getState().config.envs[name] ?? defaultState.envs[name]
@@ -20,7 +20,10 @@ export interface ConfigState {
     endpoints: {
         core: {
             api: string
-            socket: string,
+            socket: {
+                path: string,
+                port: string
+            },
         }
     }
 }
@@ -28,10 +31,7 @@ export interface ConfigState {
 const defaultState: ConfigState = {
     envs: {},
     endpoints: {
-        core: {
-            api: initConf.endpoints.back,
-            socket: `${initConf.endpoints.back}/socket.io/lights`,
-        }
+        core: initConf.endpoints.core
     }
 };
 
