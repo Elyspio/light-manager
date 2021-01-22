@@ -1,7 +1,8 @@
 import {Apis} from "../../apis";
 import store from "../../../view/store";
 import {BrightnessModelEffectEnum, LightDataModel} from "../../apis/back/models";
-import {updateLight} from "../../../view/store/module/lights/action";
+import {setPresets, updateLight} from "../../../view/store/module/lights/action";
+import {ColorHelper} from "../../helper/light";
 
 export type LightPreset = "day" | "night";
 
@@ -42,6 +43,14 @@ export class LightService {
         return data
     }
 
+    public async setColor(light: LightIdentifier, color: string) {
+        let {data} = await Apis.core.light.lightControllerColor(light.ip, {
+            rgb: ColorHelper.convertStringToRgb(color)
+        });
+        store.dispatch(updateLight([data]))
+        return data
+    }
+
     public async setPreset(theme: LightPreset, light?: LightIdentifier) {
         if (light === undefined) {
             const lights = store.getState().light.lights;
@@ -49,6 +58,12 @@ export class LightService {
         } else {
             return Apis.core.light.lightControllerPreset(light.ip, theme);
         }
+    }
+
+    public async getPresets() {
+        const {data: presets} = await Apis.core.preset.presetControllerGetAll();
+
+        store.dispatch(setPresets(presets));
     }
 
     public async setState(light: LightIdentifier, state: boolean) {

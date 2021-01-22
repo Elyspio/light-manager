@@ -1,4 +1,6 @@
 import {ColorMode} from "../../core/services/light/types";
+import {Property} from "@tsed/schema";
+import {ColorModel} from "../../view/controllers/light/models";
 
 export const refreshRate = 5000;
 export const discoverRefresh = 10000;
@@ -19,10 +21,11 @@ export type Room = "living room" | "chambers" | "others";
 
 export const presets = {
     day: {
-        mode: ColorMode.TurnHsv,
+        mode: ColorMode.TurnRgb,
         value: {
-            hue: 0,
-            sat: 0,
+            r: 255,
+            g: 255,
+            b: 255,
         },
     },
     night: {
@@ -34,3 +37,4 @@ export const presets = {
         },
     },
 };
+

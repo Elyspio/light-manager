@@ -7,7 +7,7 @@ import {Box, Button, Slider, Typography} from "@material-ui/core";
 import "./Detail.scss"
 import {Services} from "../../../../core/services";
 import {LightDataModel} from "../../../../core/apis/back/models";
-import {Preset} from "./Preset";
+import Preset from "./Preset";
 
 const mapStateToProps = (state: RootState) => ({
     current: state.light.current as LightDataModel,
@@ -41,6 +41,14 @@ class Detail extends React.Component<Props, State> {
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
         console.log("componentDidUpdate", prevProps, prevState)
+        console.log("componentDidUpdate2", this.props, this.state)
+
+        if(this.props.current.ip !== prevProps.current.ip) {
+            this.setState({
+                brightness: this.props.current.brightness
+            })
+        }
+
     }
 
     render() {
@@ -51,8 +59,9 @@ class Detail extends React.Component<Props, State> {
             <Board className={"Detail"} title={`Light: ${data.name}`}>
                 <Board title={"Colors"}
                        border={false}
+                       expanded
                        expansible>
-                    <Preset data={data}/>
+                    <Preset />
 
                 </Board>
 

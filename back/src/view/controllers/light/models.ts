@@ -5,16 +5,16 @@ import {LightData} from "../../../core/services/light/light";
 import {Room} from "../../../config/light/lights";
 
 class ColorRgbModel implements ColorRgb {
-    @Required()
     @Property(Number)
+    @Required()
     r: number;
 
-    @Required()
     @Property(Number)
+    @Required()
     g: number;
 
-    @Required()
     @Property(Number)
+    @Required()
     b: number;
 
 
@@ -27,15 +27,12 @@ class ColorRgbModel implements ColorRgb {
 
 export class ColorModel {
     @Property(ColorRgbModel)
-    @Required()
     rgb?: ColorRgbModel;
 
     @Property(Number)
-    @Required()
     colorTemp?: number;
 
     @Any()
-    @Required()
     hsv?: any;
 }
 
@@ -114,5 +111,21 @@ export class LightDataModel implements LightData {
         this.port = port;
         this.powered = powered;
         this.room = room;
+    }
+}
+
+export class PresetModel {
+    @Property()
+    @Required()
+    key: string
+
+    @Property()
+    @Required()
+    color: string
+
+
+    constructor(key: string, color: string) {
+        this.key = key;
+        this.color = color;
     }
 }

@@ -107,6 +107,7 @@ export class Light implements Comparable<Light> {
             throw "Invalid brightness percentage it must be: 1 <= percentage <= 100";
         }
         await this.service.setBright(percentage, duration, effect);
+        this.data.brightness = percentage;
     }
 
     public async toggle() {

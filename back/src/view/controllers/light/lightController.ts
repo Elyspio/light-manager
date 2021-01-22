@@ -106,7 +106,7 @@ export class LightController {
         const light = manager.get(lightIp) as Light;
         switch (preset) {
             case "day":
-                await light.setHsv(presets.day.value, "sudden", 1);
+                await light.setColor(presets.day.value, "sudden", 1);
                 break;
             case "night":
                 await light.setColor(presets.night.value, "sudden", 1);
@@ -124,7 +124,6 @@ export class LightController {
         const light = manager.get(lightIp) as Light;
         return light.json();
     }
-
 
     @Put("/:lightIp/brightness")
     @UseBefore(RequireLight)

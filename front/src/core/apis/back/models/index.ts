@@ -6,3 +6,4 @@ export * from './forbidden';
 export * from './generic-error';
 export * from './light-data-model';
 export * from './light-not-found-exception';
+export * from './preset-model';

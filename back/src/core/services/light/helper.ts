@@ -10,6 +10,11 @@ export interface Helper {
 export namespace Helper {
 
 
+
+    export function convertColorRgbToString(color: ColorRgb): string {
+        return `#${color.r.toString(16)}${color.g.toString(16)}${color.b.toString(16)}`
+    }
+
     export function convertColor(color: ColorRgb | number): number | ColorRgb {
         if (typeof color === "number") {
             let r, g, b;

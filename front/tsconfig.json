@@ -17,10 +17,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "noFallthroughCasesInSwitch": true,
     "strict": true,
-    "emitDecoratorMetadata": false
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true
   },
   "include": [
     "src"

@@ -1,0 +1,14 @@
+.Preset {
+	display: block !important;
+
+	.line {
+		display: flex;
+		justify-content: space-between;
+		align-content: center;
+	}
+
+	.divider {
+		margin: 2rem;
+	}
+
+}

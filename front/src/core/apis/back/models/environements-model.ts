@@ -16,6 +16,6 @@
  * @export
  * @interface EnvironementsModel
  */
-export type EnvironementsModel = {
-    [key in string]: string
+export type EnvironementsModel   = {
+    [p: string]: string
 }

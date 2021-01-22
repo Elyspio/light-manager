@@ -16,21 +16,20 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { EnvironementsModel } from '../models';
-import { Forbidden } from '../models';
+import { PresetModel } from '../models';
 /**
- * EnvironmentsApi - axios parameter creator
+ * PresetControllerApi - axios parameter creator
  * @export
  */
-export const EnvironmentsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const PresetControllerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        environmentsGet: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/core/environments`;
+        presetControllerGetAll: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/core/presets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -61,18 +60,18 @@ export const EnvironmentsApiAxiosParamCreator = function (configuration?: Config
 };
 
 /**
- * EnvironmentsApi - functional programming interface
+ * PresetControllerApi - functional programming interface
  * @export
  */
-export const EnvironmentsApiFp = function(configuration?: Configuration) {
+export const PresetControllerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async environmentsGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnvironementsModel>> {
-            const localVarAxiosArgs = await EnvironmentsApiAxiosParamCreator(configuration).environmentsGet(options);
+        async presetControllerGetAll(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PresetModel>>> {
+            const localVarAxiosArgs = await PresetControllerApiAxiosParamCreator(configuration).presetControllerGetAll(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -82,36 +81,36 @@ export const EnvironmentsApiFp = function(configuration?: Configuration) {
 };
 
 /**
- * EnvironmentsApi - factory interface
+ * PresetControllerApi - factory interface
  * @export
  */
-export const EnvironmentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+export const PresetControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        environmentsGet(options?: any): AxiosPromise<EnvironementsModel> {
-            return EnvironmentsApiFp(configuration).environmentsGet(options).then((request) => request(axios, basePath));
+        presetControllerGetAll(options?: any): AxiosPromise<Array<PresetModel>> {
+            return PresetControllerApiFp(configuration).presetControllerGetAll(options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * EnvironmentsApi - object-oriented interface
+ * PresetControllerApi - object-oriented interface
  * @export
- * @class EnvironmentsApi
+ * @class PresetControllerApi
  * @extends {BaseAPI}
  */
-export class EnvironmentsApi extends BaseAPI {
+export class PresetControllerApi extends BaseAPI {
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof EnvironmentsApi
+     * @memberof PresetControllerApi
      */
-    public environmentsGet(options?: any) {
-        return EnvironmentsApiFp(this.configuration).environmentsGet(options).then((request) => request(this.axios, this.basePath));
+    public presetControllerGetAll(options?: any) {
+        return PresetControllerApiFp(this.configuration).presetControllerGetAll(options).then((request) => request(this.axios, this.basePath));
     }
 }
