@@ -5,6 +5,10 @@ import {$log} from "@tsed/common";
 import {refreshRate} from "../../../config/light/lights";
 import {discover} from "./discover";
 import {CustomSet} from "../../data/CustomSet";
+import {Dayjs} from "dayjs";
+import {Ip} from "./types";
+
+const dayjs = require("dayjs")
 
 
 // const mutex = new Mutex();
@@ -17,12 +21,20 @@ export interface LightManager {
     get(ip: string): Light;
 }
 
+type ValueOf<T> = T[keyof T];
+
+
+const lastUpdate: { [key in Light["ip"]]: Dayjs } = {}
+
 
 export class LightManager extends EventEmitter {
-    public static events = {
+
+
+    static events = {
         newLight: "NEW_LIGHT",
         refreshLight: "REFRESH_LIGHT",
-    };
+        removeLight: "REMOVE_LIGHT",
+    }
 
     private readonly lights: CustomSet<Light>;
 
@@ -31,6 +43,16 @@ export class LightManager extends EventEmitter {
         this.lights = new CustomSet<Light>({lock: false});
         const self = this;
         discover()
+
+        setInterval(() => {
+            const now = dayjs();
+            Object.keys(lastUpdate).forEach(ip => {
+                if (lastUpdate[ip].add(5, "minutes").isBefore(now)) {
+                    $log.info(`Light ${ip} was not reached since 5 minutes, removing...`)
+                    this.removeLight(ip)
+                }
+            })
+        }, 1000)
 
         setTimeout(() => {
             setInterval(() => {
@@ -49,7 +71,6 @@ export class LightManager extends EventEmitter {
         return this._instance;
     }
 
-
     public get(idOrIp?: number | string) {
         if (idOrIp === undefined) {
             return this.lights.toArray().sort((a, b) => (a.ip < b.ip ? -1 : 1));
@@ -66,6 +87,10 @@ export class LightManager extends EventEmitter {
 
     public async addLight(data: Pick<Light, "id" | "ip" | "port">) {
         let refresh = false;
+
+        lastUpdate[data.ip] = dayjs()
+
+
         if (!this.lights.toArray().map((l) => l.ip).includes(data.ip)) {
             this.lights.add(
                 await Light.get(data.id.toString(), data.ip, data.port)
@@ -80,6 +105,12 @@ export class LightManager extends EventEmitter {
         }
     }
 
+    public removeLight(ip: Ip) {
+        delete lastUpdate[ip];
+        this.lights.remove(this.lights.toArray().find(l => l.ip === ip) as Light);
+        this.emit(LightManager.events.removeLight, ip)
+    }
+
     private async refresh() {
         $log.info("refresh");
 
@@ -91,3 +122,5 @@ export class LightManager extends EventEmitter {
         }))
     }
 }
+
+

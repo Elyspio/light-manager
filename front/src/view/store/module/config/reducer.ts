@@ -22,7 +22,7 @@ export interface ConfigState {
             api: string
             socket: {
                 path: string,
-                port: string
+                uri: string
             },
         }
     }

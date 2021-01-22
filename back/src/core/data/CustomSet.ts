@@ -6,7 +6,7 @@ let mutex = {
 
 
 export class CustomSet<T extends Comparable<T>> {
-    private readonly content: Array<T>
+    private content: Array<T>
 
     constructor(private options?: { data?: Iterable<T>, lock?: boolean }) {
         this.content = new Array<T>(...(this.options?.data ?? []));
@@ -46,6 +46,20 @@ export class CustomSet<T extends Comparable<T>> {
 
     toArray() {
         return [...this.content]
+    }
+
+    remove(obj: T) {
+        if (this.options?.lock) {
+            mutex.locked = true;
+            while (mutex.locked) {
+            }
+        }
+
+        this.content = this.content.filter(f => f.equal(obj));
+
+        if (this.options?.lock) {
+            mutex.locked = false;
+        }
     }
 
 

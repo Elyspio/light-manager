@@ -4,6 +4,7 @@ import {Light, LightData} from "./light";
 import {Helper} from "./helper";
 import {isDeepStrictEqual} from "util";
 import {$log} from "@tsed/common";
+import {Services} from "../index";
 
 export type LightEffect = "sudden" | "smooth";
 
@@ -106,7 +107,10 @@ export class LightService {
                 });
             });
 
-            instance.tcp.client.on("error", err => (console.error(`ERROR : tcp for ${instance.light.ip} `, err)))
+            instance.tcp.client.on("error", err => {
+                $log.error(`ERROR : tcp for ${instance.light.ip} `, err);
+                Services.light.removeLight(instance.light.ip);
+            })
         });
     }
 

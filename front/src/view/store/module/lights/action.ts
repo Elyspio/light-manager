@@ -8,3 +8,4 @@ const createAction = <T>(name: string) => _createAction<T>(`light/${name}`);
 export const addLight = createAction<LightDataModel[]>("add");
 export const updateLight = createAction<LightDataModel[]>("refresh");
 export const setForDetail = createAction<Ip | undefined>("setForDetail");
+export const deleteLight = createAction<Ip>("deleteLight");

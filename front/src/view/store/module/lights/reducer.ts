@@ -1,5 +1,5 @@
 import {ActionReducerMapBuilder, createReducer} from "@reduxjs/toolkit";
-import {addLight, setForDetail, updateLight} from "./action";
+import {addLight, deleteLight, setForDetail, updateLight} from "./action";
 import store from "../../index";
 import {createSocket} from "../../../../core/services/light/socket";
 import {Services} from "../../../../core/services";
@@ -20,8 +20,8 @@ const defaultState: LightState = {
 
 export const reducer = createReducer<LightState>(
     defaultState,
-    (builder: ActionReducerMapBuilder<LightState>) => {
-        builder.addCase(addLight, (state, action) => {
+    ({addCase}) => {
+        addCase(addLight, (state, action) => {
             for (const light of action.payload) {
                 let index = state.lights.findIndex((l) => l.ip === light.ip);
                 if (index === -1) {
@@ -32,17 +32,22 @@ export const reducer = createReducer<LightState>(
             }
         });
 
-        builder.addCase(setForDetail, (state, action) => {
+        addCase(setForDetail, (state, action) => {
             state.current = state.lights.find((l) => l.ip === action.payload);
         });
 
-        builder.addCase(updateLight, (state, action) => {
+        addCase(updateLight, (state, action) => {
             action.payload.forEach(light => {
                 const index = state.lights.findIndex((l) => l.ip === light.ip);
                 state.lights[index] = light;
                 state.current = state.lights.find(light => light.id === state.current?.id)
             })
         });
+
+        addCase(deleteLight, (state, action) => {
+            state.lights = state.lights.filter(l => l.ip === action.payload)
+            if (state.current?.ip === action.payload) state.current = undefined
+        })
     }
 );
 
@@ -63,6 +68,12 @@ export const listenSocket = (socket: typeof Socket = createSocket()) => {
         const refreshed = await Services.light.get({ip: ip});
         store.dispatch(updateLight([refreshed]));
     });
+
+
+    socket.on(socketEvents.removeLight, ip => {
+        store.dispatch(deleteLight(ip));
+    })
+
 
 }
 

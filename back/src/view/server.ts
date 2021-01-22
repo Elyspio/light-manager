@@ -33,9 +33,10 @@ let frontPath = path.resolve(rootDir, "..", "..", "front", "build");
     // @ts-ignore
     socketIO: {
         cors: {origin: [env.BACKEND_HOST ?? "http://localhost:3000"]},
+ //       path: env.SOCKET_IO_PATH ?? "/light-manager/socket.io/"
     }
 })
-export class Server {
+export class Server   {
 
     @Inject()
     app!: PlatformApplication;

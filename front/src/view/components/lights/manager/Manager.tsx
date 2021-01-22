@@ -33,7 +33,7 @@ class Manager extends Component<ReduxTypes> {
 
 
         return (
-            <Board className={"Manager"} title={"Lampes"}>
+            <Board className={"Manager"} title={"Lights"}>
                 {lights.map(l => <Light key={l.id} data={l}/>)}
             </Board>
         );

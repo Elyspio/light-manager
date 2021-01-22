@@ -3,7 +3,8 @@ import {getEndpoint} from "../../../view/store/module/config/reducer";
 
 export const createSocket = () => {
     let endpoint = getEndpoint("core");
-    return io(endpoint.socket.path, {
-        path: "/light-manager" + endpoint.socket.path
+    return io(endpoint.socket.uri + endpoint.socket.path, {
+        path: (process.env.NODE_ENV === "production" ? "/light-manager" : "") + endpoint.socket.path,
+        transports: ["websocket"]
     });
 };

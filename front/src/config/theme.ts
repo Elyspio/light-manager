@@ -10,8 +10,8 @@ const darkTheme = createMuiTheme({
             main: '#42a5f5',
         },
         background: {
-            default: "rgb(36 36 36)",
-            paper: "rgb(36 36 36)"
+            default: "#1B1B1B",
+            paper: "#1B1B1B"
         }
     },
 });
@@ -20,7 +20,7 @@ const lightTheme = createMuiTheme({
     palette: {
         type: 'light',
         primary: {
-            main: '#000',
+            main: '#4ea43b',
         },
         secondary: {
             main: '#42a5f5',
@@ -37,6 +37,6 @@ export const themes = {
 export type Themes = "dark" | "light";
 export const getUrlTheme = (): Themes =>
     new URL(window.location.toString()).searchParams.get("theme") ||
-    ("light" as any);
+    ("dark" as any);
 
 export const getCurrentTheme = (theme: Themes): Theme => themes[theme];
