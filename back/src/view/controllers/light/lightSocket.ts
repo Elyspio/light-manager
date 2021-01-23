@@ -17,14 +17,15 @@ export class MySocketService {
             const lights2 = Services.light.get() as Light[]
 
             $log.info("client ws update", lights2.map((l) => l.ip))
-            io.sockets.emit(
+            this.nsp.emit(
                 socketEvents.updateAll,
                 lights2.map((l) => l.ip)
             );
         });
 
         Services.light.on(LightManager.events.refreshLight, (ip: Ip) => {
-            io.sockets.emit(socketEvents.updateLight, ip);
+            console.log("socket update light", ip)
+            this.nsp.emit(socketEvents.updateLight, ip);
         });
     }
 

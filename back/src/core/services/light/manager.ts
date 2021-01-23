@@ -10,9 +10,6 @@ import {Ip} from "./types";
 
 const dayjs = require("dayjs")
 
-
-// const mutex = new Mutex();
-
 export interface LightManager {
     get(): Light[];
 
@@ -21,11 +18,7 @@ export interface LightManager {
     get(ip: string): Light;
 }
 
-type ValueOf<T> = T[keyof T];
-
-
 const lastUpdate: { [key in Light["ip"]]: Dayjs } = {}
-
 
 export class LightManager extends EventEmitter {
 
@@ -111,7 +104,7 @@ export class LightManager extends EventEmitter {
         this.emit(LightManager.events.removeLight, ip)
     }
 
-    private async refresh() {
+    public async refresh() {
         $log.info("refresh");
 
         await Promise.all(this.lights.toArray().map(async light => {
@@ -120,7 +113,17 @@ export class LightManager extends EventEmitter {
                 console.log("refresh light", light.ip);
             }
         }))
+
     }
+
+
+    public async refreshLight(ip: Ip) {
+        this.emit(LightManager.events.refreshLight, ip);
+        console.log("refresh light", ip);
+
+    }
+
+
 }
 
 

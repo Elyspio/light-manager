@@ -3,6 +3,7 @@ import {ColorMode, ColorRgb, Ip} from "./types";
 import {Helper} from "./helper";
 import {names, Room} from "../../../config/light/lights";
 import {Comparable} from "../../data/Comparable";
+import {Services} from "../index";
 
 export interface ColorHsv {
     hue: number;
@@ -21,8 +22,6 @@ export type LightData = {
     name: string;
     room: Room;
 };
-
-export type LightDataFull = Required<LightData>
 
 export class Light implements Comparable<Light> {
     private data: LightData;
@@ -89,13 +88,16 @@ export class Light implements Comparable<Light> {
     ) {
         if (this.mode !== ColorMode.TurnRgb) {
             await this.service.setPower(true, ColorMode.TurnRgb, duration, effect);
-        } else if (this.powered === false) {
+        } else if (!this.powered) {
             await this.service.toggle();
         }
         await this.service.setRgb(color, duration, effect);
 
         this.data.color = color;
         this.data.powered = true;
+
+        await Services.light.refreshLight(this.ip);
+
     }
 
     public async setBrightness(
@@ -108,11 +110,15 @@ export class Light implements Comparable<Light> {
         }
         await this.service.setBright(percentage, duration, effect);
         this.data.brightness = percentage;
+
+        await Services.light.refreshLight(this.ip);
+
     }
 
     public async toggle() {
         await this.service.toggle();
         this.data.powered = !this.data.powered;
+        await Services.light.refreshLight(this.ip);
     }
 
     public async init(): Promise<Light> {
@@ -154,7 +160,11 @@ export class Light implements Comparable<Light> {
     }
 
     async setMode(mode: ColorMode) {
-        return this.service.setPower(true, mode);
+        await this.service.setPower(true, mode);
+        this.data.mode = mode;
+        this.data.powered = true
+
+        await Services.light.refreshLight(this.ip);
     }
 
     setConnected(b: boolean) {
