@@ -3,8 +3,8 @@
 		"core": {
 			"api": "http://localhost:4000",
 			"socket": {
-				"path": "/socket.io/lights",
-				"uri": "http://localhost:4000"
+				"namespace": "/socket.io/lights",
+				"hostname": "localhost:4000"
 			}
 		}
 	}

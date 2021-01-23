@@ -5,7 +5,7 @@ import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
 import {RootState} from "../../../store/reducer";
 import Divider from "@material-ui/core/Divider";
-import {LightDataModel} from "../../../../core/apis/back/models";
+import {LightDataModel, PresetModel} from "../../../../core/apis/back/models";
 import "./Preset.scss"
 import ColorPicker from 'material-ui-color-picker'
 import {ColorHelper} from "../../../../core/helper/light";
@@ -17,7 +17,8 @@ interface Props {
 
 const mapStateToProps = (state: RootState) => ({
     data: state.light!.current as LightDataModel,
-    presets: state.light.presets
+    presets: state.light.presets,
+    theme: state.theme.current
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({})
@@ -36,6 +37,13 @@ class Preset extends Component<Props & ReduxTypes> {
         await Services.light.getPresets();
     }
 
+    private getColorCode  = (key: "day" | "night")  => {
+        let code = this.props.presets.find(p => p.key === key)?.color;
+        if(this.props.theme === "light" && key === "day") {
+            code = "#000"
+        }
+        return code;
+    }
 
     render() {
         const {data, presets} = this.props;
@@ -47,12 +55,12 @@ class Preset extends Component<Props & ReduxTypes> {
                     <Typography>Preset</Typography>
                     <div className="btns">
                         <Button variant={"outlined"}
-                                style={{color: presets.find(p => p.key === "day")?.color}}
+                                style={{color: this.getColorCode("day")}}
                                 onClick={() => Services.light.setPreset("day", data)}>
                             Day
                         </Button>
                         <Button variant={"outlined"}
-                                style={{color: presets.find(p => p.key === "night")?.color}}
+                                style={{color: this.getColorCode("night")}}
                                 onClick={() => Services.light.setPreset("night", data)}>
                             Night
                         </Button>
@@ -63,15 +71,14 @@ class Preset extends Component<Props & ReduxTypes> {
                 <Divider className={"divider"} variant={"fullWidth"}/>
                 <div className="line">
                     <Typography>Custom</Typography>
-                    <div className="">
-                        <ColorPicker
-                            convert={"hex"}
-                            name='color'
-                            defaultValue={ColorHelper.convertRgbToString(data.color)}
-                            onChange={this.changeColor}
-                        />
-                    </div>
-
+                        <div className={"color-picker-container"}>
+                            <ColorPicker
+                                convert={"hex"}
+                                name='color'
+                                defaultValue={ColorHelper.convertRgbToString(data.color)}
+                                onChange={this.changeColor}
+                            />
+                        </div>
                 </div>
 
 

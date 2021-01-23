@@ -21,8 +21,8 @@ export interface ConfigState {
         core: {
             api: string
             socket: {
-                path: string,
-                uri: string
+                namespace: string,
+                hostname: string
             },
         }
     }

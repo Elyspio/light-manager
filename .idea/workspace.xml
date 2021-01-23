@@ -2,41 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae199c35-aa8a-482c-a0a5-c7773df6103a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/back/src/view/controllers/light/presetController.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/core/helper/light.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/view/components/lights/light/Preset.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/config/light/lights.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/config/light/lights.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/core/services/light/helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/core/services/light/helper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/core/services/light/light.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/core/services/light/light.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/view/controllers/light/lightController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/view/controllers/light/lightController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/src/view/controllers/light/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/view/controllers/light/models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/apis/environments-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/apis/environments-api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/apis/light-controller-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/apis/light-controller-api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/base.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/base.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/configuration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/configuration.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/brightness-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/brightness-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/color-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/color-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/color-rgb-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/color-rgb-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/environements-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/environements-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/forbidden.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/forbidden.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/generic-error.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/generic-error.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/light-data-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/light-data-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/back/models/light-not-found-exception.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/back/models/light-not-found-exception.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/apis/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/apis/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/core/services/light/LightService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/services/light/LightService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/light/Detail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/light/Detail.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/light/Detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/light/Detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/conf.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/core/services/light/socket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/core/services/light/socket.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/light/Preset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/light/Preset.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/view/components/lights/light/Preset.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/components/lights/light/Preset.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/store/module/lights/action.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/module/lights/action.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/view/store/module/lights/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/module/lights/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/view/store/module/config/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/view/store/module/config/reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +69,7 @@
       <recent name="P:\own\desktop\cross-platform\light-manager\back\src\config\light" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.Back">
+  <component name="RunManager" selected="npm.Front">
     <configuration name="docker: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -144,9 +116,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.Front" />
         <item itemvalue="npm.Back" />
         <item itemvalue="npm.docker" />
-        <item itemvalue="npm.Front" />
         <item itemvalue="Docker.docker: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -169,6 +141,7 @@
       <workItem from="1611002098907" duration="8171000" />
       <workItem from="1611171454050" duration="171000" />
       <workItem from="1611171648990" duration="6968000" />
+      <workItem from="1611399034904" duration="4978000" />
     </task>
     <servers />
   </component>

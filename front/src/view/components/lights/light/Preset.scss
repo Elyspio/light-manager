@@ -11,4 +11,12 @@
 		margin: 2rem;
 	}
 
+	.color-picker-container {
+		* {
+			z-index: 99999999 !important
+		}
+
+		width: 100%;
+	}
+
 }
