@@ -1,5 +1,5 @@
 import {createReducer} from "@reduxjs/toolkit";
-import {addLight, deleteLight, setForDetail, setPresets, updateLight} from "./action";
+import {addLight, deleteLight, setForDetail, setLights, setPresets, updateLight} from "./action";
 import store from "../../index";
 import {createSocket} from "../../../../core/services/light/socket";
 import {Services} from "../../../../core/services";
@@ -37,6 +37,9 @@ export const reducer = createReducer<LightState>(
         addCase(setForDetail, (state, action) => {
             state.current = state.lights.find((l) => l.ip === action.payload);
         });
+        addCase(setLights, (state, action) => {
+            state.lights = action.payload;
+        });
 
         addCase(updateLight, (state, action) => {
             action.payload.forEach(light => {
@@ -67,7 +70,7 @@ export const listenSocket = (socket: typeof Socket = createSocket()) => {
 
         const lights = await Promise.all(ips.map(ip => Services.light.get({ip})))
 
-        store.dispatch(addLight(lights));
+        store.dispatch(setLights(lights));
     });
 
     socket.on(socketEvents.updateLight, async (ip: Ip) => {

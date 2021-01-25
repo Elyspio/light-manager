@@ -45,7 +45,7 @@ export class LightService {
 
     public async setColor(light: LightIdentifier, color: string) {
         let {data} = await Apis.core.light.lightControllerColor(light.ip, {
-            rgb: ColorHelper.convertStringToRgb(color)
+            rgb: ColorHelper.toRgb(color)
         });
         store.dispatch(updateLight([data]))
         return data

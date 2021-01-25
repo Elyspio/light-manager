@@ -1,0 +1,50 @@
+.Color {
+	//display: block !important;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	.line {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-content: center;
+
+
+		.heading {
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+
+		.preset {
+			display: grid;
+			margin-right: 4rem;
+			height: 100%;
+			width: 100%;
+
+			> div {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+
+	}
+
+	.divider {
+		margin: 2rem;
+	}
+
+
+	.color-picker-container {
+		* {
+			z-index: 99999999 !important
+		}
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-content: center;
+		width: 100%;
+	}
+
+}

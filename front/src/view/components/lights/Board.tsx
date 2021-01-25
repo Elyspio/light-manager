@@ -62,7 +62,7 @@ class BoardComponent extends React.Component<Props & ReduxTypes> {
         </AppBar>
 
 
-        const content = <div className={"body " + className}>
+        const content = <div className={"body " + (className ?? "")}>
             {children}
         </div>
 

@@ -1,4 +1,9 @@
+.Board {
+	width: 100%;
+}
+
 .Board.no-border {
+
 	> div {
 		box-shadow: none;
 	}
