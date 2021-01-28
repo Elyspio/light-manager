@@ -22,10 +22,12 @@
 		"compression": "^1.7.4",
 		"cookie-parser": "^1.4.5",
 		"cors": "^2.8.5",
+		"dayjs": "^1.10.3",
 		"method-override": "^3.0.0",
+		"pg": "^8.5.1",
 		"socket.io": "^3.1.0",
 		"tslib": "^2.1.0",
-		"dayjs": "^1.10.3"
+		"typeorm": "^0.2.30"
 	},
 	"devDependencies": {
 		"@types/body-parser": "^1.19.0",
@@ -34,10 +36,10 @@
 		"@types/cors": "^2.8.9",
 		"@types/method-override": "^0.0.31",
 		"@types/node": "^14.14.20",
-		"nodemon": "latest",
-		"ts-node": "latest",
-		"typescript": "latest",
 		"@types/socket.io": "^2.1.12",
-		"run-script-os": "^1.1.5"
+		"nodemon": "latest",
+		"run-script-os": "^1.1.5",
+		"ts-node": "latest",
+		"typescript": "latest"
 	}
 }

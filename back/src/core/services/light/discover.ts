@@ -15,7 +15,7 @@ const addresses = Object.keys(allInterfaces)
 const interfaceAddress = allInterfaces[conf["multicast-interface"]]?.find(inter => inter.family === "IPv4")?.address
 
 if (!interfaceAddress) {
-    console.error(conf,  JSON.stringify( allInterfaces))
+    console.error(conf, JSON.stringify(allInterfaces))
     throw `Could not find an IPV4 address for interface '${conf[`multicast-interface`]}', available: [${Object.keys(allInterfaces).join(", ")}]`
 }
 

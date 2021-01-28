@@ -1,6 +1,4 @@
 import {ColorMode} from "../../core/services/light/types";
-import {Property} from "@tsed/schema";
-import {ColorModel} from "../../view/controllers/light/models";
 
 export const refreshRate = 5000;
 export const discoverRefresh = 10000;

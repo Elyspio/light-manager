@@ -1,5 +1,12 @@
 {
 	"endpoints": {
-		"back": "http://192.168.0.50"
+		"core": {
+			"api": "https://elyspio.fr/light-manager",
+			"socket": {
+				"namespace": "/socket.io/lights",
+				"hostname": "elyspio.fr/light-manager/socket.io/lights"
+			}
+		}
 	}
 }
+

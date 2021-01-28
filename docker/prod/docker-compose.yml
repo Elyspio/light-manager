@@ -15,7 +15,7 @@ services:
       DATABASE_DATABASE: ${DATABASE_DATABASE}
       NETWORK_INTERFACE: eth0
     network_mode: "host"
-    container_name:  light-manager-app
+    container_name: light-manager-app
 
   database:
     image: postgres:alpine
@@ -30,5 +30,5 @@ services:
         target: /var/lib/postgresql/data
     ports:
       - ${DATABASE_PORT}:5432
-    container_name:  light-manager-db
+    container_name: light-manager-db
 

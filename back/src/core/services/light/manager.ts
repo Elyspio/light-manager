@@ -31,7 +31,7 @@ export class LightManager extends EventEmitter {
 
     private readonly lights: CustomSet<Light>;
 
-    private constructor() {
+    public constructor() {
         super();
         this.lights = new CustomSet<Light>({lock: false});
         const self = this;
@@ -54,15 +54,6 @@ export class LightManager extends EventEmitter {
         }, 1000);
     }
 
-    private static _instance: LightManager;
-
-    public static get instance() {
-        if (!this._instance) {
-            this._instance = new LightManager();
-        }
-
-        return this._instance;
-    }
 
     public get(idOrIp?: number | string) {
         if (idOrIp === undefined) {

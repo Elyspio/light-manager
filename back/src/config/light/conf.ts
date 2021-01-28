@@ -1,5 +1,5 @@
-import { env } from "process";
+import {env} from "process";
 
 export default {
-	"multicast-interface": env.NETWORK_INTERFACE ??  "Ethernet"
+    "multicast-interface": env.NETWORK_INTERFACE ?? "Ethernet"
 }
