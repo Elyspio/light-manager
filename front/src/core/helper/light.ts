@@ -1,6 +1,6 @@
 import {ColorRgbModel} from "../apis/back/models";
 
-export const  ColorHelper  = {
+export const ColorHelper = {
     fromRgb(rgb: ColorRgbModel): string {
         return `#${rgb.r.toString(16)}${rgb.g.toString(16)}${rgb.b.toString(16)}`
     },

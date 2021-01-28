@@ -82,9 +82,9 @@ export interface LightDataModel {
 }
 
 /**
-    * @export
-    * @enum {string}
-    */
+ * @export
+ * @enum {string}
+ */
 export enum LightDataModelRoomEnum {
     LivingRoom = 'living room',
     Chambers = 'chambers',

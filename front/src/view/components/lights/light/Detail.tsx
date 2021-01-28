@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {RootState} from "../../../store/reducer";
 import {connect, ConnectedProps} from "react-redux";
-import {Board, ThemeColor} from "../Board";
+import {Board} from "../Board";
 import {Dispatch} from "redux";
 import {Box, Button, Slider, Typography} from "@material-ui/core";
 import "./Detail.scss"
@@ -40,7 +40,7 @@ class Detail extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
-        if(this.props.current.ip !== prevProps.current.ip) {
+        if (this.props.current.ip !== prevProps.current.ip) {
             this.setState({
                 brightness: this.props.current.brightness
             })
@@ -58,7 +58,7 @@ class Detail extends React.Component<Props, State> {
                        expanded
                        className={"Board"}
                        expansible>
-                    <Preset />
+                    <Preset/>
 
                 </Board>
 

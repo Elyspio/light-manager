@@ -4,7 +4,6 @@ import {Services} from "../../../../core/services";
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
 import {RootState} from "../../../store/reducer";
-import Divider from "@material-ui/core/Divider";
 import {LightDataModel} from "../../../../core/apis/back/models";
 import "./Color.scss"
 import ColorPicker, {Color as IColor, toColor} from "react-color-palette";
@@ -51,7 +50,7 @@ class Color extends Component<Props, State> {
 
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any) {
-        if(ColorHelper.fromRgb(this.props.data.color) !== ColorHelper.fromRgb(prevProps.data.color)) {
+        if (ColorHelper.fromRgb(this.props.data.color) !== ColorHelper.fromRgb(prevProps.data.color)) {
             this.setState({
                 currentColor: toColor("rgb", {
                     r: this.props.data.color.r,

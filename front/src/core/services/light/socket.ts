@@ -3,7 +3,7 @@ import {getEndpoint} from "../../../view/store/module/config/reducer";
 
 export const createSocket = () => {
     let endpoint = getEndpoint("core");
-    const server =  io(clearUrl(endpoint.socket.hostname), {
+    const server = io(clearUrl(endpoint.socket.hostname), {
         transports: ["websocket"],
         autoConnect: false
     });
@@ -11,7 +11,6 @@ export const createSocket = () => {
     server.io.opts.path = clearUrl((process.env.NODE_ENV === "production" ? "/light-manager/" : "/") + endpoint.socket.namespace)
     return server.connect();
 };
-
 
 
 function clearUrl(url: string): string {

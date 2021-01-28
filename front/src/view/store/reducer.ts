@@ -1,17 +1,16 @@
 import {combineReducers} from "redux";
 
-import {reducer as themeReducer, ThemeState} from "./module/theme/reducer";
-import {ConfigState, reducer as configReducer} from "./module/config/reducer";
-import {LightState, reducer as lightReducer} from "./module/lights/reducer";
+import {reducer as themeReducer} from "./module/theme/reducer";
+import {reducer as configReducer} from "./module/config/reducer";
+import {reducer as lightReducer} from "./module/lights/reducer";
+import store from "./index";
 
-export interface RootState {
-    theme: ThemeState;
-    config: ConfigState,
-    light: LightState
-}
 
-export const rootReducer = combineReducers<RootState | undefined>({
+export const rootReducer = combineReducers({
     theme: themeReducer,
     config: configReducer,
     light: lightReducer
 });
+
+
+export type  RootState = ReturnType<typeof store.getState>
