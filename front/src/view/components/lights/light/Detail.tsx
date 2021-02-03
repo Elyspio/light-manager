@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {RootState} from "../../../store/reducer";
+import {RootState} from "../../../../core/store/reducer";
 import {connect, ConnectedProps} from "react-redux";
 import {Board} from "../Board";
 import {Dispatch} from "redux";

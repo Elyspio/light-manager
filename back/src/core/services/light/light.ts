@@ -178,6 +178,6 @@ export class Light implements Comparable<Light> {
     }
 
     equal(obj: Light): boolean {
-        return this.id === obj.id;
+        return obj !== undefined && this.id === obj.id;
     }
 }

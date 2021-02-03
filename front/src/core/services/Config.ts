@@ -1,7 +1,7 @@
 import {Apis} from "../apis";
-import store from "../../view/store";
-import {setEndpoints, setEnvironment} from "../../view/store/module/config/action";
-import {ConfigState, getEndpoint} from "../../view/store/module/config/reducer";
+import store from "../store";
+import {setEndpoints, setEnvironment} from "../store/module/config/action";
+import {ConfigState, getEndpoint} from "../store/module/config/reducer";
 
 
 export class ConfigService {

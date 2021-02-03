@@ -3,8 +3,8 @@ import {Box, Paper} from "@material-ui/core";
 import "./Application.scss"
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
-import {RootState} from "../store/reducer";
-import {toggleTheme} from "../store/module/theme/action";
+import {RootState} from "../../core/store/reducer";
+import {toggleTheme} from "../../core/store/module/theme/action";
 import Brightness5Icon from '@material-ui/icons/Brightness5';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
 import {Common} from "./lights/common/Common";

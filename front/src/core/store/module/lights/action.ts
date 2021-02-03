@@ -1,7 +1,6 @@
 import {createAction as _createAction} from "@reduxjs/toolkit";
-import {Ip} from "../../../../../../back/src/core/services/light/types";
-import {LightDataModel, PresetModel} from "../../../../core/apis/back/models";
-
+import {LightDataModel, PresetModel} from "../../../apis/back/models";
+import {Ip} from "./reducer";
 
 const createAction = <T>(name: string) => _createAction<T>(`light/${name}`);
 

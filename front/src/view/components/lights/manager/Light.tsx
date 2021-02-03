@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {Box, IconButton, Typography} from "@material-ui/core";
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import "./Light.scss"
-import {RootState} from "../../../store/reducer";
+import {RootState} from "../../../../core/store/reducer";
 import {Dispatch} from "redux";
-import {setForDetail} from "../../../store/module/lights/action";
+import {setForDetail} from "../../../../core/store/module/lights/action";
 import {connect, ConnectedProps} from "react-redux";
 import {Services} from "../../../../core/services";
-import {LightData} from "../../../../../../back/src/core/services/light/light";
-import {Ip} from "../../../../../../back/src/core/services/light/types";
+import {LightDataModel} from "../../../../core/apis/back/models";
+import {Ip} from "../../../../core/store/module/lights/reducer";
 
 
 const mapStateToProps = (state: RootState) => ({
@@ -24,7 +24,7 @@ type ReduxTypes = ConnectedProps<typeof connector>;
 
 
 interface Props extends ReduxTypes {
-    data: LightData
+    data: LightDataModel
 }
 
 class Light extends Component<Props> {

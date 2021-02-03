@@ -1,5 +1,5 @@
 import {EnvironmentsApi, LightControllerApi, PresetControllerApi} from "./back"
-import {getEndpoint} from "../../view/store/module/config/reducer";
+import {getEndpoint} from "../store/module/config/reducer";
 
 type Apis = {
     core: {

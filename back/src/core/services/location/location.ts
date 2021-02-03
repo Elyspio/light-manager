@@ -1,4 +1,4 @@
-import {LocationObjectModelWithId, LocationUserModel, UserModel} from "../../../view/controllers/location/models";
+import {LocationObjectModelWithId, LocationUserModel, UserModel} from "../../../web/controllers/location/models";
 import {Repositories} from "../../database/repositories";
 import {UserEntity} from "../../database/entities/userEntity";
 

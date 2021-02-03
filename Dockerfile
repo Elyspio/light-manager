@@ -1,26 +1,33 @@
+# Building back
+FROM node:14 as builder-back
+
+COPY back/package.json /back/package.json
+RUN cd /back && npm install
+
+COPY back/src /back/src
+COPY back/tsconfig.json /back/tsconfig.json
+RUN cd /back && npm run build
+
+# Building front
+FROM node:14 as builder-front
+
+COPY front/package.json /front/package.json
+RUN cd /front && npm install
+
+COPY front/tsconfig.json /front/tsconfig.json
+COPY front/public /front/public
+COPY front/src /front/src
+RUN cd /front && npm run build
+
+# Running
 FROM node:14-alpine
 
-# Create app directory
-WORKDIR /app
+COPY --from=builder-front /front/build /front
+COPY --from=builder-back /back/package.json /back/package.json
+RUN cd /back && npm i --only=production
+COPY --from=builder-back /back/build /back/build
 
-# Front
-RUN mkdir -p /app/front
-COPY front/build /app/front/build
-
-# Server
-RUN mkdir -p /app/back
-COPY back/build /app/back
-COPY back/package.json /app/back/package.json
-RUN cd back && npm i --only=production
-
-
-# Setting environment variables
-ENV LOG_FOLDER /app/logs
+WORKDIR /back
+ENV LOG_FOLDER /logs
 ENV NODE_ENV production
-
-EXPOSE 4000
-
-WORKDIR /app/back
-
-CMD ["node", "app.js"]
-
+CMD ["node", "build/app.js"]

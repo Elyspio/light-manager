@@ -5,9 +5,7 @@
 	"scripts": {
 		"start": "nodemon src/app.ts",
 		"build": "tsc",
-		"docker": "run-script-os",
-		"docker:linux": "wsl ../docker/docker.sh",
-		"docker:win32": "powershell ../docker/docker.ps1"
+		"docker": "docker buildx build --platform \"linux/amd64,linux/arm64\"  -f ../Dockerfile -t elyspio/light-manager --push .."
 	},
 	"dependencies": {
 		"@tsed/common": "^6.22.2",
@@ -38,7 +36,6 @@
 		"@types/node": "^14.14.20",
 		"@types/socket.io": "^2.1.12",
 		"nodemon": "latest",
-		"run-script-os": "^1.1.5",
 		"ts-node": "latest",
 		"typescript": "latest"
 	}

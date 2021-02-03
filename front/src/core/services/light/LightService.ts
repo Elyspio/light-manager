@@ -1,8 +1,9 @@
 import {Apis} from "../../apis";
-import store from "../../../view/store";
+import store from "../../store";
 import {BrightnessModelEffectEnum, LightDataModel} from "../../apis/back/models";
-import {setPresets, updateLight} from "../../../view/store/module/lights/action";
+import {setLights, setPresets, updateLight} from "../../store/module/lights/action";
 import {ColorHelper} from "../../helper/light";
+import {timeBetweenWholeUpdate} from "../../../config/light/timers";
 
 export type LightPreset = "day" | "night";
 
@@ -14,8 +15,10 @@ export class LightService {
 
     public static get instance() {
         console.log("getting new instance")
-        if (LightService._instance === undefined)
+        if (LightService._instance === undefined) {
             LightService._instance = new LightService();
+            setInterval(LightService._instance.getAll, timeBetweenWholeUpdate)
+        }
         return LightService._instance;
     }
 
@@ -33,7 +36,7 @@ export class LightService {
 
     public async getAll(): Promise<LightDataModel[]> {
         let {data} = await Apis.core.light.lightControllerGetAll();
-        store.dispatch(updateLight(data))
+        store.dispatch(setLights(data))
         return data
     }
 

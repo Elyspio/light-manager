@@ -1,12 +1,11 @@
 import {createReducer} from "@reduxjs/toolkit";
 import {addLight, deleteLight, setForDetail, setLights, setPresets, updateLight} from "./action";
 import store from "../../index";
-import {createSocket} from "../../../../core/services/light/socket";
-import {Services} from "../../../../core/services";
-import {Ip} from "../../../../../../back/src/core/services/light/types";
+import {createSocket} from "../../../services/light/socket";
+import {Services} from "../../../services";
 import {socketEvents} from "../../../../config/light/sockets";
 import {Socket} from "socket.io-client";
-import {LightDataModel, PresetModel} from "../../../../core/apis/back/models";
+import {LightDataModel, PresetModel} from "../../../apis/back/models";
 
 export interface LightState {
     lights: LightDataModel[];
@@ -60,6 +59,8 @@ export const reducer = createReducer<LightState>(
     }
 );
 
+
+export type Ip = LightDataModel["ip"]
 
 export const listenSocket = (socket: typeof Socket = createSocket()) => {
 

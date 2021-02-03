@@ -2,7 +2,7 @@ import React, {CSSProperties, ReactNode} from "react";
 import {Accordion, AccordionDetails, AccordionSummary, AppBar, Box, Paper, Toolbar, Typography} from "@material-ui/core";
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
-import {RootState} from "../../store/reducer";
+import {RootState} from "../../../core/store/reducer";
 import "./Board.scss"
 
 interface Props {

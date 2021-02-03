@@ -3,7 +3,7 @@ import {AccordionDetails, Button, Typography} from "@material-ui/core";
 import {Services} from "../../../../core/services";
 import {connect, ConnectedProps} from "react-redux";
 import {Dispatch} from "redux";
-import {RootState} from "../../../store/reducer";
+import {RootState} from "../../../../core/store/reducer";
 import {LightDataModel} from "../../../../core/apis/back/models";
 import "./Color.scss"
 import ColorPicker, {Color as IColor, toColor} from "react-color-palette";

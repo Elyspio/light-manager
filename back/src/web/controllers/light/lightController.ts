@@ -1,5 +1,5 @@
 import {Services} from "../../../core/services";
-import {BodyParams, Controller, Get, PathParams, Put, QueryParams, UseBefore} from "@tsed/common";
+import {BodyParams, Controller, Get, PathParams, Put, UseBefore} from "@tsed/common";
 import {NotImplementedException} from "../../exceptions/NotImplementedException";
 import {Light} from "../../../core/services/light/light";
 import {LightNotFoundException} from "../../../core/exceptions/light/LightNotFoundException";
@@ -68,7 +68,7 @@ export class LightController {
     @Returns(200, LightDataModel)
     async switch(
         @PathParams("lightIp", String) lightIp: string,
-        @QueryParams("state") state: boolean
+        @BodyParams("state", Boolean) state: boolean
     ) {
         const light = manager.get(lightIp) as Light;
 
@@ -82,7 +82,7 @@ export class LightController {
 
     @Put("/switch")
     @Returns(200, Array).Of(LightDataModel)
-    async switchAll(@QueryParams("state") state: boolean) {
+    async switchAll(@BodyParams("state", Boolean) state: boolean) {
         const light = manager.get() as Light[];
 
         await Promise.all(light.map(async l => {
