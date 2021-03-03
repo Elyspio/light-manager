@@ -3,8 +3,8 @@ import {BodyParams, Controller, Get, PathParams, Put, UseBefore} from "@tsed/com
 import {NotImplementedException} from "../../exceptions/NotImplementedException";
 import {Light} from "../../../core/services/light/light";
 import {LightNotFoundException} from "../../../core/exceptions/light/LightNotFoundException";
-import {Returns} from "@tsed/schema";
-import {BrightnessModel, ColorModel, LightDataModel} from "./models";
+import {Required, Returns} from "@tsed/schema";
+import {BrightnessModel, ColorModel, LightDataModel, SwitchLightModel} from "./models";
 import {RequireLight} from "../../middleware/light";
 import {presets} from "../../../config/light/lights";
 
@@ -67,8 +67,8 @@ export class LightController {
     @Returns(500, LightNotFoundException)
     @Returns(200, LightDataModel)
     async switch(
-        @PathParams("lightIp", String) lightIp: string,
-        @BodyParams("state", Boolean) state: boolean
+        @Required() @PathParams("lightIp", String) lightIp: string,
+        @Required() @BodyParams(SwitchLightModel) {state}: SwitchLightModel
     ) {
         const light = manager.get(lightIp) as Light;
 

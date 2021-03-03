@@ -4,6 +4,17 @@ import {LightEffect} from "../../../core/services/light/service";
 import {LightData} from "../../../core/services/light/light";
 import {Room} from "../../../config/light/lights";
 
+
+export class SwitchLightModel {
+    @Property(Boolean)
+    state: boolean
+
+
+    constructor(state: boolean) {
+        this.state = state;
+    }
+}
+
 class ColorRgbModel implements ColorRgb {
     @Property(Number)
     @Required()

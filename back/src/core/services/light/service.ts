@@ -102,9 +102,7 @@ export class LightService {
             instance.tcp.client.on("end", (e: any) => {
                 console.error(`Connection with ${instance.light.ip} ended`, e);
                 light.setConnected(false);
-                instance.tcp.client.setTimeout(1000, () => {
-                    connect();
-                });
+                setTimeout( connect, 1000);
             });
 
             instance.tcp.client.on("error", err => {
