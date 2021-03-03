@@ -3,7 +3,7 @@ import {setEndpoints, setEnvironment} from "./action";
 import store from "../../index";
 
 const xhr = new XMLHttpRequest()
-xhr.open("GET", "/light-manager/" + "/conf.json", false)
+xhr.open("GET", "/light-manager/conf.json", false)
 xhr.send()
 const initConf: ConfigState = JSON.parse(xhr.responseText)
 

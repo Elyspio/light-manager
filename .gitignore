@@ -8,3 +8,4 @@ front/.bitmap
 *.eslintcache
 .idea
 docker/prod/database
+prod/database

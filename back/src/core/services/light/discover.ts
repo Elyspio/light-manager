@@ -29,6 +29,7 @@ export const discover = () => {
         udpServer.setMulticastInterface(interfaceAddress);
         udpServer.addMembership(address);
     });
+
     udpServer.on("listening", () => {
         const address = udpServer.address();
         $log.info("UDP Client listening on ", address);

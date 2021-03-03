@@ -23,3 +23,5 @@ export class Storage {
         return (await readFile(name)).toString()
     }
 }
+
+

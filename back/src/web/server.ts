@@ -1,5 +1,5 @@
 import {Configuration, Inject} from "@tsed/di";
-import {PlatformApplication} from "@tsed/common";
+import {$log, PlatformApplication} from "@tsed/common";
 import {middlewares} from "./middleware/common/raw";
 import * as path from "path";
 import "@tsed/swagger";
@@ -7,7 +7,10 @@ import "@tsed/socketio";
 import {env} from "process"
 
 export const rootDir = __dirname;
-let frontPath = path.resolve(rootDir, "..", "..", "front", "build");
+let frontPath = process.env.NODE_ENV === "production"
+    ? path.resolve("/", "front")
+    : path.resolve(rootDir, "..", "..", "..", "front", "build");
+$log.info(frontPath)
 
 @Configuration({
     rootDir,
