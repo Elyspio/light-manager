@@ -7,6 +7,8 @@ import {discover} from "./discover";
 import {CustomSet} from "../../data/CustomSet";
 import {Dayjs} from "dayjs";
 import {Ip} from "./types";
+import {Repositories} from "../../database/repositories";
+import {LogAction} from "../../database/entities/lightLogEntity";
 
 const dayjs = require("dayjs")
 
@@ -76,11 +78,13 @@ export class LightManager extends EventEmitter {
 
 
         if (!this.lights.toArray().map((l) => l.ip).includes(data.ip)) {
-            this.lights.add(
+            if (this.lights.add(
                 await Light.get(data.id.toString(), data.ip, data.port)
-            );
-            $log.info("added", data);
-            refresh = true;
+            )) {
+                await Repositories.logs.lights.add({lightIp: data.ip, actionType: LogAction.LightDetection, actionValue: JSON.stringify(data), userIp: "SYSTEM"})
+                $log.info("added", data);
+                refresh = true;
+            }
         }
 
         if (refresh) {

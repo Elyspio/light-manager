@@ -4,6 +4,9 @@ import {Helper} from "./helper";
 import {names, Room} from "../../../config/light/lights";
 import {Comparable} from "../../data/Comparable";
 import {Services} from "../index";
+import {Database} from "../../database";
+import {Repositories} from "../../database/repositories";
+import {LogAction} from "../../database/entities/lightLogEntity";
 
 export interface ColorHsv {
     hue: number;
@@ -76,9 +79,15 @@ export class Light implements Comparable<Light> {
         effect?: LightEffect,
         duration?: number
     ) {
+
+
+
         if (this.data.mode !== ColorMode.TurnHsv)
             await this.service.setPower(true, ColorMode.TurnHsv);
         await this.service.setHsv(color.hue, color.sat, duration, effect);
+
+
+
     }
 
     public async setColor(
@@ -86,8 +95,12 @@ export class Light implements Comparable<Light> {
         effect?: LightEffect,
         duration?: number
     ) {
+
+
+
         if (this.mode !== ColorMode.TurnRgb) {
             await this.service.setPower(true, ColorMode.TurnRgb, duration, effect);
+            this.data.mode = ColorMode.TurnRgb;
         } else if (!this.powered) {
             await this.service.toggle();
         }
@@ -97,6 +110,8 @@ export class Light implements Comparable<Light> {
         this.data.powered = true;
 
         await Services.light.refreshLight(this.ip);
+
+
 
     }
 
@@ -112,7 +127,6 @@ export class Light implements Comparable<Light> {
         this.data.brightness = percentage;
 
         await Services.light.refreshLight(this.ip);
-
     }
 
     public async toggle() {

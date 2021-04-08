@@ -4,7 +4,6 @@ let mutex = {
     locked: false
 }
 
-
 export class CustomSet<T extends Comparable<T>> {
     private content: Array<T>
 
@@ -21,11 +20,13 @@ export class CustomSet<T extends Comparable<T>> {
 
         if (!this.contains(obj)) {
             this.content.push(obj)
+            return true;
         }
 
         if (this.options?.lock) {
             mutex.locked = false;
         }
+        return false;
     }
 
     contains(obj: T): boolean {

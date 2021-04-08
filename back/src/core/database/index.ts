@@ -4,6 +4,7 @@ import {Repositories} from "./repositories";
 import {databaseOptions} from "../../config/database";
 import {UserRepository} from "./repositories/userRepository";
 import {LocationRepository} from "./repositories/locationRepository";
+import {LightLogRepository} from "./repositories/logs/lightLogRepository";
 
 export class Database {
 
@@ -11,8 +12,9 @@ export class Database {
 
     public static async init() {
         const con = await Database.get();
-        Repositories.user = con.getCustomRepository(UserRepository)
-        Repositories.location = con.getCustomRepository(LocationRepository)
+        Repositories.user = con.getCustomRepository(UserRepository);
+        Repositories.location = con.getCustomRepository(LocationRepository);
+        Repositories.logs.lights = con.getCustomRepository(LightLogRepository);
     }
 
     private static async connect() {

@@ -77,8 +77,8 @@ export namespace LampSocket {
 
 export enum ColorMode {
     TurnOn,
-    TurnCt,
     TurnRgb,
+    TurnCt,
     TurnHsv,
     TurnColorFlow,
 }
