@@ -5,6 +5,8 @@ import {Helper} from "./helper";
 import {isDeepStrictEqual} from "util";
 import {$log} from "@tsed/common";
 import {Services} from "../index";
+import {Repositories} from "../../database/repositories";
+import {LogAction} from "../../database/entities/lightLogEntity";
 
 export type LightEffect = "sudden" | "smooth";
 
@@ -102,7 +104,7 @@ export class LightService {
             instance.tcp.client.on("end", (e: any) => {
                 console.error(`Connection with ${instance.light.ip} ended`, e);
                 light.setConnected(false);
-                setTimeout( connect, 1000);
+                setTimeout(connect, 1000);
             });
 
             instance.tcp.client.on("error", err => {
@@ -153,7 +155,16 @@ export class LightService {
         throw data;
     }
 
-    public setRgb(color: ColorRgb, duration?: number, effect?: LightEffect) {
+    public async setRgb(color: ColorRgb, duration?: number, effect?: LightEffect) {
+
+
+        await Repositories.logs.lights.add({
+            lightIp: this.light.ip,
+            actionType: LogAction.ChangeColor,
+            actionValue: JSON.stringify({color, duration, effect, type: "rgb"}),
+            userIp: ""
+        })
+
         return this.interact(
             {
                 method: "set_rgb",
@@ -177,12 +188,20 @@ export class LightService {
         );
     }
 
-    public setHsv(
+    public async setHsv(
         hue: number,
         sat: number,
         duration?: number,
         effect?: LightEffect
     ) {
+
+        await Repositories.logs.lights.add({
+            lightIp: this.light.ip,
+            actionType: LogAction.ChangeColor,
+            actionValue: JSON.stringify({hue, sat, duration, effect, type: "hsv"}),
+            userIp: ""
+        })
+
         return this.interact(
             {
                 method: "set_hsv",
@@ -192,11 +211,19 @@ export class LightService {
         );
     }
 
-    public setBright(
+    public async setBright(
         brightness: number,
         duration?: number,
         effect?: LightEffect
     ) {
+
+        await Repositories.logs.lights.add({
+            lightIp: this.light.ip,
+            actionType: LogAction.Toggle,
+            actionValue: JSON.stringify({brightness, duration, effect}),
+            userIp: ""
+        })
+
         return this.interact(
             {
                 method: "set_bright",
@@ -206,12 +233,19 @@ export class LightService {
         );
     }
 
-    public setPower(
+    public async setPower(
         state: boolean,
         mode: ColorMode,
         duration?: number,
         effect?: LightEffect
     ) {
+        await Repositories.logs.lights.add({
+            lightIp: this.light.ip,
+            actionType: LogAction.Toggle,
+            actionValue: JSON.stringify({state, duration, mode, effect}),
+            userIp: ""
+        })
+
         return this.interact(
             {
                 method: "set_power",
@@ -235,7 +269,14 @@ export class LightService {
         });
     }
 
-    public toggle() {
+    public async toggle() {
+        await Repositories.logs.lights.add({
+            lightIp: this.light.ip,
+            actionType: LogAction.Toggle,
+            actionValue: "",
+            userIp: ""
+        })
+
         return this.interact({
             method: "toggle",
             params: [],
