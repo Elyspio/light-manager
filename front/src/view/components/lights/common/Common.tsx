@@ -11,13 +11,13 @@ export class Common extends Component {
             <Board title={"Common"} className={"Common"}>
                 <div className="btns">
                     <Button variant={"outlined"}
-                            onClick={() => Services.light.switchAll(true)}
+                            onClick={() => Services.light.setAllState(true)}
                             color={"primary"}>
                         Power On
                     </Button>
 
                     <Button variant={"outlined"}
-                            onClick={() => Services.light.switchAll(false)}
+                            onClick={() => Services.light.setAllState(false)}
                             color={"secondary"}>
                         Power Off
                     </Button>

@@ -78,6 +78,19 @@ export class LightService {
         }
     }
 
+
+    public async setAllState(state: boolean) {
+        const lights = store.getState().light.lights;
+
+        for (let light of lights) {
+            if(light.powered !== state) {
+                const data = await this.toggle(light)
+                store.dispatch(updateLight([data]))
+            }
+
+        }
+    }
+
     public async setBrightness(light: LightIdentifier, value: number) {
 
         const {data} = await Apis.core.light.lightControllerBrightness(light.ip, {
